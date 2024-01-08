@@ -3,7 +3,7 @@ package com.moveone.app.util;
 public class Pager {
 	private Long startRow;
 	private Long lastRow;
-	private Long perPage=10l;
+	private Long perPage=10L;
 	private Long page;
 	
 	public Long getStartRow() {
@@ -28,12 +28,7 @@ public class Pager {
 		return page;
 	}
 	public void setPage(Long page) {
-		if(page == null || page < 1) {
-			this.page = 1l;
-		} else {
-			this.page = page;
-		}
-		makeRows();
+		this.page = (page == null || page < 1) ? 1L : page;
 	}
 	
 	public void makeRows() {

@@ -11,7 +11,7 @@
 			FROM PRODUCT P
 			ORDER BY PRODUCTNUM DESC
 			) PR
-		WHERE PR.R BETWEEN #{startRow} AND #{lastRow};
+		WHERE PR.R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
 	<select id="getDetail" parameterType="ProductDTO" resultType="ProductDTO">

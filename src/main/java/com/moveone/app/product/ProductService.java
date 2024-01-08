@@ -13,6 +13,7 @@ public class ProductService {
 	ProductDAO productDAO;
 	
 	public List<ProductDTO> getList(Pager pager) throws Exception {
+		pager.makeRows();
 		return productDAO.getList(pager);
 	}
 	

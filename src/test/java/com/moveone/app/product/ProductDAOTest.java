@@ -19,7 +19,7 @@ public class ProductDAOTest extends MyTest {
 	public void getListTest() throws Exception {
 		
 		Pager page = new Pager();
-		page.setPage(1l);
+		page.setPage(1L);
 		List<ProductDTO> list = dao.getList(page);
 		
 		assertEquals(10, list.size());
