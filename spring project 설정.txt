@@ -1,0 +1,69 @@
+1. 프로젝트 생성(Spring MVC Project) - 프로젝트명 - basepackage 입력
+2. Library 설정(pom.xml)
+	1. Java : 1.6 -> 1.11
+	2. Spring : 3.1.1 -> 4.3.2 RELEASE 이상
+	
+	3. Mybatis : 
+		1. mybatis (3.5.9) (3.5.15)
+		2. mybatis-spring (2.0.7) (2.1.2)
+		3. spring-jdbc (Spring version과 같게)
+		4. jdbc (19.21.0.0)
+
+	4. JUnit : 
+		1. 버전 수정 (junit 4.7 -> 4.12이상)
+		2. 라이브러리 추가 (spring-test - Spring version과 같게)
+
+3. Mybatis 설정
+	1. Mybatis 객체 생성 용 spring 설정파일 생성
+		1. web.xml 에서 설정파일 경로 지정 (root-context.xml -> *-context.xml)
+		2. spring 설정파일 만들기 (spring bean configuration file)
+			- schema가 없다면 namespace에서 beans를 체크해 생성
+	
+	2. Spring 설정파일에 Mybatis객체 생성
+		1. database.properties
+			oracle.user={id}
+			oracle.user={password}
+			oracle.user=jdbc:oracle:thin:@{ip:port}:xe
+			oracle.driver=oracle.jdbc.driver.OracleDriver
+
+			-> 이후 -context.xml 안에 .properties 파일을 알려줌
+				- <context:property-placeholder location="{properties file path}"/>
+
+		2. DataSource : ID, PW, URL, Driver
+			<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+				<property name="username" value="${oracle.user}"></property>
+				<property name="password" value="${oracle.password}"></property>
+				<property name="url" value="${oracle.url}"></property>
+				<property name="driverClassName" value="${oracle.driver}"></property>
+			</bean>
+
+		3. DataSource, Mapper위치, Config위치를 알려주는 sqlSessionFactoryBean
+			<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+				<property name="dataSource" ref="dataSource"></property>
+				<property name="configLocation" value="{config file path}"></property>
+				<property name="mapperLocations" value="{mapper file path}"></property>
+			</bean>
+
+		4. SqlSession 객체 생성
+			<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+				<constructor-arg name="sqlSessionFactory" ref="{sqlSessionFactoryBean id}"></constructor-arg>
+			</bean>
+
+	3. Config, MapperSample 생성
+		1. Config : config파일의 schema
+			<!DOCTYPE configuration
+  			  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  			  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+		2. Mapper : mapper의 schema
+			<!DOCTYPE mapper
+  			  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  			  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+4. JUnit 설정
+	1. 부모형으로 쓸 MyTest class 생성
+		@RunWith(SpringJUnit4ClassRunner.class)
+		@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/**/*-context.xml")
+			- test는 서버를 실행하지 않고 테스트하기 때문에 서버 실행시 불러와야하는 것들을 지정해줌
+	2. 이후 테스트는 MyTest를 상속받아 사용
