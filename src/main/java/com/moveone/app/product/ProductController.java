@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.moveone.app.util.Pager;
+
 /*
  * controller에서 parameter처리
  * 1. Bean (객체, DTO)
@@ -32,8 +34,8 @@ public class ProductController {
 	ProductService productService;
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
-	public String list(Model model) throws Exception {
-		List<ProductDTO> list = productService.getList();
+	public String list(Pager pager, Model model) throws Exception {
+		List<ProductDTO> list = productService.getList(pager);
 		model.addAttribute("list", list);
 		
 		return "products/list";
