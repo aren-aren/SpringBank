@@ -41,4 +41,9 @@ public class ProductDAO {
 	public Long getTotal(Pager pager) {
 		return sqlSession.selectOne(namespace+"getTotal", pager);
 	}
+
+	public Integer addFile(ProductFileDTO fileDTO) {
+		return sqlSession.insert(namespace + "addFile", fileDTO);
+		
+	}
 }

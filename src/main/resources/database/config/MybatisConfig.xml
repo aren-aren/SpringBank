@@ -8,6 +8,7 @@
 	 	<typeAlias type="java.lang.String" alias="String"/>
 	 	<typeAlias type="com.moveone.app.product.ProductDTO" alias="ProductDTO"/>
 	 	<typeAlias type="com.moveone.app.util.Pager" alias="Pager"/>
+	 	<typeAlias type="com.moveone.app.product.ProductFileDTO" alias="ProductFileDTO"/>
 	 </typeAliases>
 	 
 </configuration>

@@ -67,6 +67,9 @@
 				</ul>
 			</nav>
 		</div>
+		<div>
+			<a class="btn btn-primary" href="add">Add</a>
+		</div>
 	</section>
 
 	<c:import url="../templates/bootstrap_js.jsp"></c:import>

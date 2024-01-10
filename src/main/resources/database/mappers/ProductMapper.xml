@@ -36,10 +36,23 @@
 		<include refid="search"></include>
 	</select>
 	
+	<insert id="addFile" parameterType="ProductFileDTO">
+		INSERT INTO PRODUCTFILE
+		VALUES (
+			PRODUCTFILE_SEQ.NEXTVAL,
+			#{productNum},
+			#{fileName},
+			#{oriName}
+		)
+	</insert>
+	
 	<insert id="addProduct" parameterType="ProductDTO">
+		<selectKey keyProperty="productNum" resultType="java.lang.Long" order="BEFORE">
+			SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO PRODUCT 
 		VALUES (
-			PRODUCT_SEQ.NEXTVAL, 
+			#{productNum}, 
 			#{productName}, 
 			#{productContents}, 
 			#{productRate}, 

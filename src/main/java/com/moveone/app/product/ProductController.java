@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.moveone.app.util.Pager;
 
@@ -32,6 +34,27 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@RequestMapping(value="add", method=RequestMethod.POST)
+	public ModelAndView add(ProductDTO productDTO, MultipartFile productFile) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = productService.add(productDTO, productFile);
+		
+		String msg = result == 0 ? "등록 실패" : "등록 성공";
+		
+		mv.addObject("msg", msg);
+		mv.addObject("path", "./list");
+		mv.setViewName("commons/result");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="add", method=RequestMethod.GET)
+	public String add(){
+		
+		return "products/add";
+	}
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public String list(Pager pager, Model model) throws Exception {

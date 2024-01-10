@@ -38,4 +38,8 @@ public class ProductDTO {
 		this.productJumsu = productJumsu;
 	}
 	
+	@Override
+	public String toString() {
+		return productNum + " : " + productName + " : " + (productContents == null) + " : " + productRate + " : " + productJumsu;
+	}
 }
