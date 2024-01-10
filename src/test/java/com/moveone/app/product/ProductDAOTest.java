@@ -15,12 +15,18 @@ public class ProductDAOTest extends MyTest {
 	@Autowired
 	ProductDAO dao;
 	
+	@Autowired
+	ProductService service;
+	
 	@Test
 	public void getListTest() throws Exception {
 		
 		Pager page = new Pager();
 		page.setPage(1L);
-		List<ProductDTO> list = dao.getList(page);
+		assertNull(page.getStart());
+		List<ProductDTO> list = service.getList(page);
+		
+		assertNotNull(page.getStart());
 		
 		assertEquals(10, list.size());
 	}

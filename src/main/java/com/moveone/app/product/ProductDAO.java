@@ -37,4 +37,8 @@ public class ProductDAO {
 	public Integer deleteProduct(ProductDTO productDTO) {
 		return null;
 	}
+
+	public Long getTotal() {
+		return sqlSession.selectOne(namespace+"getTotal");
+	}
 }
