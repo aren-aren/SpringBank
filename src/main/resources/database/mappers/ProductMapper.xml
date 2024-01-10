@@ -7,7 +7,7 @@
 	<sql id="search">
 		<where>
 			<if test="kind=='kind1' or kind=='kind3'">
-				OR PRODUCTNAME LIKE '%'||#{search}||'%'
+				PRODUCTNAME LIKE '%'||#{search}||'%'
 			</if>
 			<if test="kind=='kind2' or kind=='kind3'">
 				OR PRODUCTCONTENTS LIKE '%'||#{search}||'%'
@@ -30,8 +30,10 @@
 		SELECT * FROM PRODUCT WHERE PRODUCTNUM = #{productNum}
 	</select>
 	
-	<select id="getTotal" resultType="java.lang.Long">
-		SELECT COUNT(PRODUCTNUM) FROM PRODUCT <include refid="search"></include>
+	<select id="getTotal" parameterType="Pager" resultType="java.lang.Long">
+		SELECT COUNT(PRODUCTNUM) 
+		FROM PRODUCT 
+		<include refid="search"></include>
 	</select>
 	
 	<insert id="addProduct" parameterType="ProductDTO">

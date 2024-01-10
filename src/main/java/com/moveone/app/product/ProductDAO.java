@@ -38,7 +38,7 @@ public class ProductDAO {
 		return null;
 	}
 
-	public Long getTotal() {
-		return sqlSession.selectOne(namespace+"getTotal");
+	public Long getTotal(Pager pager) {
+		return sqlSession.selectOne(namespace+"getTotal", pager);
 	}
 }
