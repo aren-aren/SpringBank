@@ -26,11 +26,27 @@
 		WHERE PR.R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="getDetail" parameterType="ProductDTO" resultType="ProductDTO">
-		SELECT * FROM PRODUCT WHERE PRODUCTNUM = #{productNum}
+	<select id="getDetail" parameterType="ProductDTO" resultMap="getDetailResult">
+		SELECT *
+		FROM PRODUCT P
+			LEFT JOIN PRODUCTFILE PF USING(PRODUCTNUM)
+		WHERE PRODUCTNUM = #{productNum}
 	</select>
 	
-	<select id="getTotal" parameterType="Pager" resultType="java.lang.Long">
+	<resultMap type="ProductDTO" id="getDetailResult">
+		<id column="PRODUCTNUM" property="productNum"/>
+		<result column="PRODUCTNAME" property="productName"/>
+		<result column="PRODUCTCONTENTS" property="productContents"/>
+		<result column="PRODUCTRATE" property="productRate"/>
+		<result column="PRODUCTJUMSU" property="productJumsu"/>
+		<collection property="productFileDTOs" javaType="List" ofType="ProductFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="ORINAME" property="oriName"/>
+		</collection>
+	</resultMap>
+	
+	<select id="getTotal" parameterType="Pager" resultType="Long">
 		SELECT COUNT(PRODUCTNUM) 
 		FROM PRODUCT 
 		<include refid="search"></include>

@@ -16,17 +16,30 @@
 	<section id="contents" class="container">
 		<div class="row mt-4">
 			<form action="/products/add" method="post" enctype="multipart/form-data">
-					<label for="ProductName" class="form-label">ProductName</label> <input type="text" class="form-control" id="ProductName" name="productName" placeholder="product Name">
-			
+				<div>
+					<label for="ProductName" class="form-label">ProductName</label> 
+					<input type="text" class="form-control" id="ProductName" name="productName" placeholder="product Name">
+				</div>
+				<div>
 					<label for="content-area" class="form-label">Content</label>
 					<textarea id="content-area" name="productContents" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+				</div>
+				<div>
+					<label for="productRate" class="form-label">Product Rate</label> 
+					<input type="text" class="form-control" id="productRate" name="productRate" placeholder="product Rate">	
+				</div>				
+				<div>
+					<label for="productJumsu" class="form-label">Product Jumsu</label> 
+					<input type="text" class="form-control" id="productJumsu" name="productJumsu" placeholder="product Jumsu">	
+				</div>				
+				<div>
+					<label for="productFile" class="form-label">Product File</label> 
+					<input type="file" class="form-control" id="productFile" name="productFile" placeholder="product File">		
+					<input type="file" class="form-control" id="productFile" name="productFile" placeholder="product File">		
+					<input type="file" class="form-control" id="productFile" name="productFile" placeholder="product File">		
+				</div>			
 
-					<label for="productRate" class="form-label">Product Rate</label> <input type="text" class="form-control" id="productRate" name="productRate" placeholder="product Rate">					
-	
-					<label for="productJumsu" class="form-label">Product Jumsu</label> <input type="text" class="form-control" id="productJumsu" name="productJumsu" placeholder="product Jumsu">					
-	
-					<label for="productFile" class="form-label">Product File</label> <input type="file" class="form-control" id="productFile" name="productFile" placeholder="product File">					
-
+					
 				<button type="submit" class="btn btn-primary">Add</button>
 			</form>
 		</div>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.moveone.app.util.FileManager;
 import com.moveone.app.util.Pager;
 
 @Service
@@ -19,6 +20,8 @@ public class ProductService {
 	ProductDAO productDAO;
 	@Autowired
 	ServletContext servletContext;
+	@Autowired
+	FileManager fileManager;
 	
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		pager.makeRows();
@@ -33,27 +36,25 @@ public class ProductService {
 		return productDAO.getDetail(dto);
 	}
 
-	public int add(ProductDTO productDTO, MultipartFile file) throws Exception {
+	public int add(ProductDTO productDTO, MultipartFile[] files) throws Exception {
 		int result = productDAO.addProduct(productDTO);
 		
-		String path = servletContext.getRealPath("/resources/upload");
-		File f = new File(path, "products");
+		String path = servletContext.getRealPath("/resources/upload/products");
 		
-		if(!f.exists()) {
-			f.mkdirs();
+		for(MultipartFile f : files) {
+			if(f.isEmpty()) {
+				continue;
+			}
+			
+			String filename = fileManager.fileSave(path, f);
+		
+			ProductFileDTO fileDTO = new ProductFileDTO();
+			fileDTO.setFileName(filename);
+			fileDTO.setOriName(f.getOriginalFilename());
+			fileDTO.setProductNum(productDTO.getProductNum());
+		
+			productDAO.addFile(fileDTO);
 		}
-		
-		String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-		f = new File(f,filename);
-		
-		
-		ProductFileDTO fileDTO = new ProductFileDTO();
-		fileDTO.setFileName(filename);
-		fileDTO.setOriName(file.getOriginalFilename());
-		fileDTO.setProductNum(productDTO.getProductNum());
-		
-		productDAO.addFile(fileDTO);
-		FileCopyUtils.copy(file.getBytes(), f);
 		
 		return result;
 	}

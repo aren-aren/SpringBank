@@ -9,6 +9,9 @@
 	 	<typeAlias type="com.moveone.app.product.ProductDTO" alias="ProductDTO"/>
 	 	<typeAlias type="com.moveone.app.util.Pager" alias="Pager"/>
 	 	<typeAlias type="com.moveone.app.product.ProductFileDTO" alias="ProductFileDTO"/>
+	 	
+	 	<typeAlias type="java.lang.Long" alias="Long"/>
+	 	<typeAlias type="java.util.List" alias="List"/>
 	 </typeAliases>
 	 
 </configuration>

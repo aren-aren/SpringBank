@@ -1,11 +1,14 @@
 package com.moveone.app.product;
 
+import java.util.List;
+
 public class ProductDTO {
 	private Long productNum;
 	private String productName;
 	private String productContents;
 	private Double productRate;
 	private Double productJumsu;
+	private List<ProductFileDTO> productFileDTOs;
 	
 	public Long getProductNum() {
 		return productNum;
@@ -36,6 +39,12 @@ public class ProductDTO {
 	}
 	public void setProductJumsu(Double productJumsu) {
 		this.productJumsu = productJumsu;
+	}
+	public List<ProductFileDTO> getProductFileDTOs() {
+		return productFileDTOs;
+	}
+	public void setProductFileDTOs(List<ProductFileDTO> productFileDTOs) {
+		this.productFileDTOs = productFileDTOs;
 	}
 	
 	@Override

@@ -36,7 +36,7 @@ public class ProductController {
 	ProductService productService;
 	
 	@RequestMapping(value="add", method=RequestMethod.POST)
-	public ModelAndView add(ProductDTO productDTO, MultipartFile productFile) throws Exception {
+	public ModelAndView add(ProductDTO productDTO, MultipartFile[] productFile) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = productService.add(productDTO, productFile);
