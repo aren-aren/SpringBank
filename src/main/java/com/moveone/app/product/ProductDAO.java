@@ -35,7 +35,7 @@ public class ProductDAO {
 	}
 	
 	public Integer deleteProduct(ProductDTO productDTO) {
-		return null;
+		return sqlSession.delete(namespace + "deleteProduct", productDTO);
 	}
 
 	public Long getTotal(Pager pager) {
@@ -45,5 +45,9 @@ public class ProductDAO {
 	public Integer addFile(ProductFileDTO fileDTO) {
 		return sqlSession.insert(namespace + "addFile", fileDTO);
 		
+	}
+
+	public List<ProductFileDTO> getListFiles(ProductDTO productDTO) {
+		return sqlSession.selectList(namespace + "getListFiles", productDTO);
 	}
 }

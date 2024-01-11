@@ -52,6 +52,10 @@
 		<include refid="search"></include>
 	</select>
 	
+	<select id="getListFiles" parameterType="ProductDTO" resultType="ProductFileDTO">
+		SELECT * FROM PRODUCTFILE WHERE PRODUCTNUM=#{productNum}
+	</select>
+	
 	<insert id="addFile" parameterType="ProductFileDTO">
 		INSERT INTO PRODUCTFILE
 		VALUES (
@@ -75,4 +79,8 @@
 			#{productJumsu}
 		)
 	</insert>
+	
+	<delete id="deleteProduct" parameterType="ProductDTO">
+		DELETE PRODUCT WHERE PRODUCTNUM = #{productNum}
+	</delete>
 </mapper>

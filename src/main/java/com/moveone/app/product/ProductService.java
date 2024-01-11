@@ -1,14 +1,11 @@
 package com.moveone.app.product;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.moveone.app.util.FileManager;
@@ -54,6 +51,23 @@ public class ProductService {
 			fileDTO.setProductNum(productDTO.getProductNum());
 		
 			productDAO.addFile(fileDTO);
+		}
+		
+		return result;
+	}
+	
+	public int delete(ProductDTO productDTO) {
+		List<ProductFileDTO> fileList = productDAO.getListFiles(productDTO);
+		
+		int result = productDAO.deleteProduct(productDTO);
+		
+		String path = servletContext.getRealPath("/resources/upload/products");
+		boolean isDeleted = true;
+		for(ProductFileDTO file : fileList) {
+			isDeleted &= fileManager.fileDelete(path, file.getFileName());
+		}
+		if(!isDeleted) {
+			System.out.println("삭제 실패");
 		}
 		
 		return result;

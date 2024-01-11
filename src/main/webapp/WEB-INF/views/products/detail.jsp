@@ -10,12 +10,12 @@
 <body>
 	<c:import url="../templates/header.jsp"></c:import>
 
-	<section class="container-fluid mt-4">
-		<div class="card" style="width: 18rem;">
+	<section class="container mt-4 d-flex justify-content-center">
+		<div class="card w-25">
 			<div class="card-header">${dto.productNum }</div>
 			<div class="card-body">
 
-				<h5 class="card-title">${dto.productName }</h5>
+				<h5 class="card-title fs-3">${dto.productName }</h5>
 
 				<c:if test="${dto.productFileDTOs.size() > 0 }">
 					<div id="carouselExample" class="carousel slide">
@@ -34,19 +34,33 @@
 							</c:forEach>
 						</div>
 						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+							<span class="visually-hidden">Previous</span>
 						</button>
 						<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+							<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+							<span class="visually-hidden">Next</span>
 						</button>
 					</div>
 				</c:if>
 
-				<p class="card-text">${dto.productContents }</p>
+				<p class="card-text fs-4">${dto.productContents }</p>
 			</div>
 			<ul class="list-group list-group-flush">
-				<li class="list-group-item">${dto.productRate }</li>
-				<li class="list-group-item">${dto.productJumsu }</li>
+				<li class="list-group-item">
+					<div class="small">이자율</div>
+					<div class="fs-3">${dto.productRate}</div>
+				</li>
+				<li class="list-group-item">
+					<div class="small">평점</div>
+					<div class="fs-3">${dto.productJumsu}</div>
+				</li>
+				<li class="list-group-item">
+					<form action="./delete" method="post">
+						<input type=hidden name="productNum" value="${dto.productNum}">
+						<button id="deleteBtn" class="btn btn-secondary">삭제</button>
+					</form>
+				</li>
 			</ul>
 		</div>
 

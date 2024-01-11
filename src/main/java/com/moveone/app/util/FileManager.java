@@ -43,4 +43,10 @@ public class FileManager {
 		
 		return filename;
 	}
+
+	public boolean fileDelete(String path, String fileName) {
+		File f = new File(path, fileName);
+		
+		return f.delete();
+	}
 }

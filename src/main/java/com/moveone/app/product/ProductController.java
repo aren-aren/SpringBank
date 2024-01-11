@@ -75,4 +75,13 @@ public class ProductController {
 		
 		return "products/detail";
 	}
+	
+	@RequestMapping(value="delete", method=RequestMethod.POST)
+	public String delete(ProductDTO productDTO, Model model) throws Exception {
+		int result = productService.delete(productDTO);
+		
+		model.addAttribute("msg", (result != 0)? productDTO.getProductNum() + " 삭제 성공" : "삭제 실패");
+		model.addAttribute("path", "./list");
+		return "commons/result";
+	}
 }
