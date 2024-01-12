@@ -22,8 +22,8 @@
 	2. Spring 설정파일에 Mybatis객체 생성
 		1. database.properties
 			oracle.user={id}
-			oracle.user={password}
-			oracle.user=jdbc:oracle:thin:@{ip:port}:xe
+			oracle.password={password}
+			oracle.url=jdbc:oracle:thin:@{ip:port}:xe
 			oracle.driver=oracle.jdbc.driver.OracleDriver
 
 			-> 이후 -context.xml 안에 .properties 파일을 알려줌

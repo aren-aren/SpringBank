@@ -5,6 +5,8 @@
 
 <configuration>
 	 <typeAliases>
-	 	<typeAlias type="java.lang.String" alias="String"/>
+		 <typeAlias type="java.lang.String" alias="String"/>
+		 <typeAlias type="com.moveone.app.products.ProductDTO" alias="ProductDTO"/>
+		 <typeAlias type="com.moveone.app.utils.Pager" alias="Pager"/>
 	 </typeAliases>
 </configuration>
