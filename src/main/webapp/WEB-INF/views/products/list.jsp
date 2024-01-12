@@ -10,18 +10,24 @@
         <meta name="author" content="" />
         <title>Personal - Start Bootstrap Theme</title>
         <!-- 사용전 경로 수정 -->
-        <c:import url="templates/head_css.jsp"></c:import>
+        <c:import url="../templates/head_css.jsp"></c:import>
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- 사용전 경로 수정 -->
-			<c:import url="templates/header.jsp"></c:import>
+			<c:import url="../templates/header.jsp"></c:import>
 			
+			<div class="container px-5 my-5">
+                <div class="text-center mb-5">
+                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Product List</span></h1>
+                </div>
+            </div>
+
             <div>
-                
+                <a class="btn btn-primary" href="add">상품등록</a>
             </div>
         </main>
         <!-- 사용전 경로 수정 -->
-		<c:import url="templates/footer.jsp"></c:import>
+		<c:import url="../templates/footer.jsp"></c:import>
     </body>
 </html>

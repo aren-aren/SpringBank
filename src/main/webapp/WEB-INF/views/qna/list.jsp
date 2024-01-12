@@ -10,18 +10,18 @@
         <meta name="author" content="" />
         <title>Personal - Start Bootstrap Theme</title>
         <!-- 사용전 경로 수정 -->
-        <c:import url="templates/head_css.jsp"></c:import>
+        <c:import url="../templates/head_css.jsp"></c:import>
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- 사용전 경로 수정 -->
-			<c:import url="templates/header.jsp"></c:import>
+			<c:import url="../templates/header.jsp"></c:import>
 			
-            <div>
-                
-            </div>
+			<div>
+				<h1>Q&A List</h1>
+			</div>
         </main>
         <!-- 사용전 경로 수정 -->
-		<c:import url="templates/footer.jsp"></c:import>
+		<c:import url="../templates/footer.jsp"></c:import>
     </body>
 </html>
