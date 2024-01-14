@@ -4,7 +4,11 @@ import com.moveone.app.MyTest;
 import com.moveone.app.utils.Pager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mock.web.MockServletContext;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -23,5 +27,27 @@ public class ProductServiceTest extends MyTest {
         System.out.println(pager);
 
         assertEquals(10, list.size());
+    }
+
+    @Test
+    public void add() throws Exception {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setProductName("Rqqqq");
+        productDTO.setProductContents("fnweunfjkew");
+        productDTO.setProductRate(2.3);
+
+        MultipartFile[] files = new MultipartFile[0];
+        int reuslt = productService.add(productDTO, files);
+
+        assertEquals(1, reuslt);
+    }
+
+    @Test
+    public  void detail(){
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setProductNum(3L);
+        ProductDTO result = productService.getDetail(productDTO);
+
+        System.out.println(result);
     }
 }

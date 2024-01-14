@@ -19,7 +19,23 @@ public class ProductDAO {
         return sqlSession.selectList(namespace + "getList", pager);
     }
 
-    public Long getTotal() {
-        return sqlSession.selectOne(namespace + "getTotal");
+    public Long getTotal(Pager pager) {
+        return sqlSession.selectOne(namespace + "getTotal", pager);
+    }
+
+    public int add(ProductDTO productDTO) {
+        return sqlSession.insert(namespace + "add", productDTO);
+    }
+
+    public ProductDTO getDetail(ProductDTO productDTO) {
+        return sqlSession.selectOne(namespace + "getDetail", productDTO);
+    }
+
+    public int addFile(ProductFileDTO fileDTO) {
+        return sqlSession.insert(namespace + "addFile", fileDTO);
+    }
+
+    public List<ProductFileDTO> getFiles(ProductDTO productDTO) {
+        return sqlSession.selectList(namespace + "getFiles", productDTO);
     }
 }

@@ -4,17 +4,50 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.moveone.app.products.ProductDAO">
+    <sql id="search">
+        <where>
+            <if test="kind=='kind1' or kind=='kind3'">
+                PRODUCTNAME LIKE '%'||#{search}||'%'
+            </if>
+            <if test="kind=='kind2' or kind=='kind3'">
+                OR PRODUCTCONTENTS LIKE '%'||#{search}||'%'
+            </if>
+        </where>
+    </sql>
+
     <select id="getList" parameterType="Pager" resultType="ProductDTO">
         SELECT PR.PRODUCTNUM, PR.PRODUCTNAME, PR.PRODUCTRATE, PR.PRODUCTJUMSU, PR.PRODUCTCOUNT
         FROM (
             SELECT ROWNUM R, P.*
             FROM PRODUCT P
+            <include refid="search"/>
             ORDER BY P.PRODUCTNUM DESC
         ) PR
         WHERE PR.R BETWEEN #{startRow} AND #{lastRow}
     </select>
 
-    <select id="getTotal" resultType="java.lang.Long">
-        SELECT COUNT(PRODUCTNUM) FROM PRODUCT
+    <select id="getTotal" parameterType="Pager" resultType="java.lang.Long">
+        SELECT COUNT(PRODUCTNUM) FROM PRODUCT <include refid="search"/>
     </select>
+
+    <select id="getDetail" parameterType="ProductDTO" resultType="ProductDTO">
+        SELECT * FROM PRODUCT WHERE PRODUCTNUM = #{productNum}
+    </select>
+
+    <select id="getFiles" parameterType="ProductDTO" resultType="ProductFileDTO">
+        SELECT * FROM PRODUCTFILE WHERE PRODUCTNUM = #{productNum}
+    </select>
+
+    <insert id="add" parameterType="ProductDTO">
+        <selectKey resultType="java.lang.Long" keyProperty="productNum" order="BEFORE">
+            SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO PRODUCT(PRODUCTNUM, PRODUCTNAME, PRODUCTCONTENTS, PRODUCTRATE)
+        VALUES (#{productNum}, #{productName}, #{productContents}, #{productRate})
+    </insert>
+
+    <insert id="addFile" parameterType="ProductFileDTO">
+        INSERT INTO PRODUCTFILE
+        VALUES (PRODUCT_SEQ.NEXTVAL, #{productNum}, #{fileName}, #{oriName})
+    </insert>
 </mapper>

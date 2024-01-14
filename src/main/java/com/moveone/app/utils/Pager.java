@@ -11,6 +11,26 @@ public class Pager {
     private Long totalPage;
 
     private Boolean start;
+    private Boolean last;
+
+    private String search;
+    private String kind;
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
 
     public Long getStartNum() {
         return startNum;
@@ -51,8 +71,6 @@ public class Pager {
     public void setLast(Boolean last) {
         this.last = last;
     }
-
-    private Boolean last;
 
     public Long getStartRow() {
         return startRow;
@@ -104,7 +122,7 @@ public class Pager {
         start = (currentBlock == 1L);
         if(currentBlock.equals(lastBlock)){
             last = true;
-            totalPage = lastNum;
+            lastNum = totalPage;
         }
     }
 

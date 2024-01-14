@@ -43,11 +43,11 @@
 
 							<div class="mb-3">
 								<h5 class="fw-bolder mb-1">첨부파일</h5>
-								<input type="file" class="form-control" name="productFiles">
-								<input type="file" class="form-control" name="productFiles">
-								<input type="file" class="form-control" name="productFiles">
-								<input type="file" class="form-control" name="productFiles">
-								<input type="file" class="form-control" name="productFiles">
+								<input type="file" class="form-control" name="files">
+								<input type="file" class="form-control" name="files">
+								<input type="file" class="form-control" name="files">
+								<input type="file" class="form-control" name="files">
+								<input type="file" class="form-control" name="files">
 							</div>
 
 							<div class="d-grid">
@@ -57,7 +57,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</main>
 	<c:import url="../templates/footer.jsp"></c:import>

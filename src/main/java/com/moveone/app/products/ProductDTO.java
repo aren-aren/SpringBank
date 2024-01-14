@@ -1,5 +1,7 @@
 package com.moveone.app.products;
 
+import java.util.List;
+
 public class ProductDTO {
     private Long productNum;
     private String productName;
@@ -8,6 +10,16 @@ public class ProductDTO {
     private Double productJumsu;
     private Long productCount;
     private Long productSale;
+
+    private List<ProductFileDTO> productFiles;
+
+    public List<ProductFileDTO> getProductFiles() {
+        return productFiles;
+    }
+
+    public void setProductFiles(List<ProductFileDTO> productFiles) {
+        this.productFiles = productFiles;
+    }
 
     public Long getProductNum() {
         return productNum;
@@ -77,4 +89,5 @@ public class ProductDTO {
                 ", productSale=" + productSale +
                 '}';
     }
+
 }
