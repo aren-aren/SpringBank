@@ -2,25 +2,25 @@ package com.moveone.app.board.notice;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.moveone.app.board.BoardDAO;
 import com.moveone.app.board.BoardDTO;
+import com.moveone.app.board.BoardService;
 import com.moveone.app.utils.Pager;
 
-@Repository
-public class NoticeDAO implements BoardDAO {
-
-	@Autowired
-	private SqlSession sqlSession;
-	private final String namespace = "com.moveone.app.board.notice.NoticeDAO.";
+@Service
+public class NoticeService implements BoardService {
 	
+	@Autowired
+	private BoardDAO noticeDAO;
+
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+"getList", pager);
+		pager.makeRow();
+		
+		return noticeDAO.getList(pager);
 	}
 
 	@Override
@@ -45,12 +45,6 @@ public class NoticeDAO implements BoardDAO {
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public Long getTotalCount(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

@@ -2,9 +2,11 @@ package com.moveone.app.board;
 
 import java.util.List;
 
+import com.moveone.app.utils.Pager;
+
 public interface BoardService {
 
-	public List<BoardDTO> getList() throws Exception;
+	public List<BoardDTO> getList(Pager pager) throws Exception;
 	
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception;
 	

@@ -1,4 +1,4 @@
-package com.moveone.app.board.notice;
+package com.moveone.app.board.qna;
 
 import java.util.List;
 
@@ -11,16 +11,15 @@ import com.moveone.app.board.BoardDTO;
 import com.moveone.app.utils.Pager;
 
 @Repository
-public class NoticeDAO implements BoardDAO {
+public class QnADAO implements BoardDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private final String namespace = "com.moveone.app.board.notice.NoticeDAO.";
+	private final String namespace = "com.moveone.app.board.notice.qna.QnADAO.";
 	
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+"getList", pager);
+		return sqlSession.selectList(namespace + "getList", pager);
 	}
 
 	@Override

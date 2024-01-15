@@ -9,5 +9,7 @@
 		 <typeAlias type="com.moveone.app.products.ProductDTO" alias="ProductDTO"/>
 		 <typeAlias type="com.moveone.app.utils.Pager" alias="Pager"/>
 		 <typeAlias type="com.moveone.app.products.ProductFileDTO" alias="ProductFileDTO"/>
+		 <typeAlias type="com.moveone.app.board.notice.NoticeDTO" alias="NoticeDTO"/>
+		 <typeAlias type="com.moveone.app.board.qna.QnADTO" alias="QnADTO"/>
 	 </typeAliases>
 </configuration>

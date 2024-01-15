@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.moveone.app.board.notice.qna.QnADAO">
+	<select id="getList" parameterType="Pager" resultType="QnADTO">
+	SELECT * FROM(
+		SELECT ROWNUM R, Q.* 
+		FROM QNA Q
+		ORDER BY NOTICENUM DESC
+	) QA
+	WHERE QA.R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+</mapper>

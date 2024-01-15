@@ -54,7 +54,7 @@
                     <th>판매횟수</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                 <c:forEach items="${list}" var="dto">
                     <tr>
                         <td>${dto.productNum}</td>
