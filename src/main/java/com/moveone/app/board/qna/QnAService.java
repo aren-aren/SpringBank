@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.moveone.app.board.BoardDAO;
 import com.moveone.app.board.BoardDTO;
@@ -30,9 +31,9 @@ public class QnAService implements BoardService{
 	}
 
 	@Override
-	public int setAdd(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
+		
+		return boardDAO.setAdd(boardDTO);
 	}
 
 	@Override

@@ -19,13 +19,13 @@
 			
 			<section class="py-5">
                 <div class="text-center mb-5">
-                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Board List</span></h1>
+                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">${title } List</span></h1>
                 </div>
 
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-11 col-xl-9 col-xxl-8">
                         <div>
-                            <table class="table table-striped table-warning table-hover">
+                            <table class="table table-striped table-success table-hover">
                                 <thead>
                                     <tr>
                                         <th style="width: 8%">번호</th>
@@ -48,6 +48,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div>
+                			<a class="btn btn-success" href="add">글쓰기</a>
+            			</div>
                     </div>
                 </div>
             </section>

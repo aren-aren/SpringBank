@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.moveone.app.board.BoardDAO;
 import com.moveone.app.board.BoardDTO;
+import com.moveone.app.board.BoardFileDTO;
 import com.moveone.app.utils.Pager;
 
 @Repository
@@ -29,8 +30,7 @@ public class NoticeDAO implements BoardDAO {
 
 	@Override
 	public int setAdd(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(namespace + "setAdd", boardDTO);
 	}
 
 	@Override
@@ -50,5 +50,12 @@ public class NoticeDAO implements BoardDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int setAddFile(BoardFileDTO fileDTO) throws Exception {
+		return sqlSession.insert(namespace + "setAddFile", fileDTO);
+	}
+	
+	
 
 }

@@ -1,13 +1,19 @@
 package com.moveone.app.board.notice;
 
+import java.io.File;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.moveone.app.board.BoardDAO;
 import com.moveone.app.board.BoardDTO;
+import com.moveone.app.board.BoardFileDTO;
 import com.moveone.app.board.BoardService;
+import com.moveone.app.utils.FileManager;
 import com.moveone.app.utils.Pager;
 
 @Service
@@ -15,6 +21,10 @@ public class NoticeService implements BoardService {
 	
 	@Autowired
 	private BoardDAO noticeDAO;
+	@Autowired
+	private ServletContext servletContext;
+	@Autowired
+	private FileManager fileManager;
 
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
@@ -28,9 +38,24 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setAdd(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
+		System.out.println(boardDTO.getNoticeNum());
+		int result = noticeDAO.setAdd(boardDTO);
+		System.out.println(boardDTO.getNoticeNum());
+		String path = servletContext.getRealPath("/resources/upload/noitce");
+		
+		for(MultipartFile file : files) {
+			String filename = fileManager.fileSave(file, path);
+			
+			BoardFileDTO fileDTO = new BoardFileDTO();
+			fileDTO.setFileName(filename);
+			fileDTO.setOriName(file.getOriginalFilename());
+			fileDTO.setNoticeNum(boardDTO.getNoticeNum());
+			
+			noticeDAO.setAddFile(fileDTO);
+		}
+		
+		return result;
 	}
 
 	@Override

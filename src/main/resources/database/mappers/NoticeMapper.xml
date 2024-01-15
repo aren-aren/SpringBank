@@ -33,4 +33,18 @@
     		<result column="ORINAME" property="oriName"/>
     	</collection>
 	</resultMap>
+	
+	
+	<insert id="setAdd" parameterType="BoardDTO">
+		<selectKey resultType="Long" keyProperty="noticeNum" order="BEFORE">
+            SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+		INSERT INTO NOTICE(NOTICENUM, NOTICETITLE, WRITER, NOTICECONTENTS)
+		VALUES (#{noticeNum}, #{noticeTitle}, #{writer}, #{noticeContents})		
+	</insert>
+	
+	<insert id="setAddFile" parameterType="BoardFileDTO">
+		INSERT INTO NOTICEFILES
+		VALUES (NOTICE_SEQ.NEXTVAL, #{noticeNum}, #{fileName}, #{oriName})
+	</insert>
 </mapper>

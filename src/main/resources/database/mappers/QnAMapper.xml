@@ -36,4 +36,12 @@
     		<result column="ORINAME" property="oriName"/>
     	</collection>
 	</resultMap>
+	
+	<insert id="setAdd" parameterType="QnADTO">
+		<selectKey resultType="Long" keyProperty="noticeNum" order="BEFORE">
+            SELECT QNA_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+		INSERT INTO QNA(NOTICENUM, NOTICETITLE, WRITER, NOTICECONTENTS, NOTICEREF, NOTICESTEP, NOTICEDEPTH)
+		VALUES (#{noticeNum}, #{noticeTitle}, #{writer}, #{noticeContents}, #{noticeNum}, 0, 0)		
+	</insert>
 </mapper>

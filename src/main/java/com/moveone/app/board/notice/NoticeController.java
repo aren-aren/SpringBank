@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.moveone.app.board.BoardDTO;
 import com.moveone.app.board.BoardService;
@@ -28,6 +30,7 @@ public class NoticeController {
 		List<BoardDTO> list = boardService.getList(pager);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("title", "Notice");
 		
 		return "board/list";
 	}
@@ -40,5 +43,18 @@ public class NoticeController {
 		model.addAttribute("title", "Notice");
 		
 		return "board/detail";
+	}
+	
+	@GetMapping("add")
+	public String add() throws Exception {
+		return "board/add";
+	}
+	
+	@PostMapping("add")
+	public String add(NoticeDTO noticeDTO, MultipartFile[] files) throws Exception {
+		System.out.println(noticeDTO);
+		int result = boardService.setAdd(noticeDTO, files);
+		
+		return "redirect:./list";
 	}
 }

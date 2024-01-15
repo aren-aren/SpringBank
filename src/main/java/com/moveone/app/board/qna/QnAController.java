@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -47,11 +48,11 @@ public class QnAController {
 	public String getList(Pager pager, Model model) throws Exception {
 		List<BoardDTO> list = boardService.getList(pager);
 		model.addAttribute("list", list);
-		
+		model.addAttribute("title", "Q&A");
 		return "board/list";
 	}
 	
-	@GetMapping
+	@GetMapping("detail")
 	public String getDetail(QnADTO qnaDTO, Model model) throws Exception {
 		QnADTO dto = (QnADTO) boardService.getDetail(qnaDTO);
 		
@@ -59,5 +60,17 @@ public class QnAController {
 		model.addAttribute("title", "Q&A");
 		
 		return "board/detail";
+	}
+	
+	@GetMapping("add")
+	public String add() throws Exception {
+		return "board/add";
+	}
+	
+	@PostMapping("add")
+	public String add(QnADTO qnaDTO) throws Exception{
+		boardService.setAdd(qnaDTO, null);
+		
+		return "redirect:./list";
 	}
 }
