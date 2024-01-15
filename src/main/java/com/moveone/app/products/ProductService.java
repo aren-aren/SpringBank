@@ -52,10 +52,7 @@ public class ProductService {
     }
 
     public ProductDTO getDetail(ProductDTO productDTO) {
-        List<ProductFileDTO> productFileDTOList = productDAO.getFiles(productDTO);
-
         ProductDTO detail = productDAO.getDetail(productDTO);
-        detail.setProductFiles(productFileDTOList);
 
         return detail;
     }

@@ -31,4 +31,14 @@ public class NoticeController {
 		
 		return "board/list";
 	}
+	
+	@GetMapping("detail")
+	public String getdetail(NoticeDTO noticeDto, Model model) throws Exception {
+		NoticeDTO dto = (NoticeDTO) boardService.getDetail(noticeDto);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("title", "Notice");
+		
+		return "board/detail";
+	}
 }

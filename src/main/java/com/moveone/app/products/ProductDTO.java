@@ -10,7 +10,6 @@ public class ProductDTO {
     private Double productJumsu;
     private Long productCount;
     private Long productSale;
-
     private List<ProductFileDTO> productFiles;
 
     public List<ProductFileDTO> getProductFiles() {

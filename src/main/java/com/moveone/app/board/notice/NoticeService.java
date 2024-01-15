@@ -19,14 +19,12 @@ public class NoticeService implements BoardService {
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		pager.makeRow();
-		
 		return noticeDAO.getList(pager);
 	}
 
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return noticeDAO.getDetail(boardDTO);
 	}
 
 	@Override

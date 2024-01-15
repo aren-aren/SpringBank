@@ -12,4 +12,25 @@
 	) NO
 	WHERE NO.R BETWEEN #{startRow} AND #{lastRow}
 	</select>
+	
+	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
+		SELECT * 
+		FROM NOTICE 
+			LEFT JOIN NOTICEFILES USING(NOTICENUM)
+		WHERE NOTICENUM = #{noticeNum}
+	</select>
+	
+	<resultMap type="NoticeDTO" id="getDetailResult">
+    	<id column="NOTICENUM" property="noticeNum"/>
+    	<result column="NOTICETITLE" property="noticeTitle"/>
+    	<result column="WRITER" property="writer"/>
+    	<result column="NOTICECONTENTS" property="noticeContents"/>
+    	<result column="NOTICEDATE" property="noticeDate"/>
+    	<result column="NOTICEVIEWS" property="noticeViews"/>
+    	<collection property="boardFiles" javaType="List" ofType="BoardFileDTO">
+    		<id property="fileNum" column="FILENUM"/>
+    		<result column="FILENAME" property="fileName"/>
+    		<result column="ORINAME" property="oriName"/>
+    	</collection>
+	</resultMap>
 </mapper>

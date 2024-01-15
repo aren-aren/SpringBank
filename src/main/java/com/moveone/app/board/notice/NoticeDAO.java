@@ -19,14 +19,12 @@ public class NoticeDAO implements BoardDAO {
 	
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+"getList", pager);
 	}
 
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace + "getDetail", boardDTO);
 	}
 
 	@Override

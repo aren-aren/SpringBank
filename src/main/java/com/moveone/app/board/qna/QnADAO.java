@@ -24,8 +24,7 @@ public class QnADAO implements BoardDAO {
 
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace + "getDetail", boardDTO);
 	}
 
 	@Override

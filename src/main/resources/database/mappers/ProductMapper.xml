@@ -26,20 +26,33 @@
         WHERE PR.R BETWEEN #{startRow} AND #{lastRow}
     </select>
 
-    <select id="getTotal" parameterType="Pager" resultType="java.lang.Long">
+    <select id="getTotal" parameterType="Pager" resultType="Long">
         SELECT COUNT(PRODUCTNUM) FROM PRODUCT <include refid="search"/>
     </select>
 
-    <select id="getDetail" parameterType="ProductDTO" resultType="ProductDTO">
-        SELECT * FROM PRODUCT WHERE PRODUCTNUM = #{productNum}
+    <select id="getDetail" parameterType="ProductDTO" resultMap="getDetailResult">
+        SELECT * 
+        FROM PRODUCT
+        	LEFT JOIN PRODUCTFILE USING(PRODUCTNUM) 
+        WHERE PRODUCTNUM = #{productNum}
     </select>
-
-    <select id="getFiles" parameterType="ProductDTO" resultType="ProductFileDTO">
-        SELECT * FROM PRODUCTFILE WHERE PRODUCTNUM = #{productNum}
-    </select>
+    
+    <resultMap type="ProductDTO" id="getDetailResult">
+    	<id column="PRODUCTNUM" property="productNum"/>
+    	<result column="PRODUCTNAME" property="productName"/>
+    	<result column="PRODUCTCONTENTS" property="productContents"/>
+    	<result column="PRODUCTCOUNT" property="productCount"/>
+    	<result column="PRODUCTRATE" property="productRate"/>
+    	<result column="PRODUCTJUMSU" property="productJumsu"/>
+    	<collection property="productFiles" javaType="List" ofType="BoardFileDTO">
+    		<id property="fileNum" column="FILENUM"/>
+    		<result column="FILENAME" property="fileName"/>
+    		<result column="ORINAME" property="oriName"/>
+    	</collection>
+    </resultMap>
 
     <insert id="add" parameterType="ProductDTO">
-        <selectKey resultType="java.lang.Long" keyProperty="productNum" order="BEFORE">
+        <selectKey resultType="Long" keyProperty="productNum" order="BEFORE">
             SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO PRODUCT(PRODUCTNUM, PRODUCTNAME, PRODUCTCONTENTS, PRODUCTRATE)

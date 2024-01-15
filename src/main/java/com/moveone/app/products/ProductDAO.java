@@ -34,8 +34,4 @@ public class ProductDAO {
     public int addFile(ProductFileDTO fileDTO) {
         return sqlSession.insert(namespace + "addFile", fileDTO);
     }
-
-    public List<ProductFileDTO> getFiles(ProductDTO productDTO) {
-        return sqlSession.selectList(namespace + "getFiles", productDTO);
-    }
 }

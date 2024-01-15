@@ -12,4 +12,28 @@
 	) QA
 	WHERE QA.R BETWEEN #{startRow} AND #{lastRow}
 	</select>
+	
+	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
+		SELECT *
+		FROM QNA
+			LEFT JOIN QNAFILES USING(NOTICENUM)
+		WHERE NOTICENUM = #{noticeNum}
+	</select>
+	
+	<resultMap type="QnADTO" id="getDetailResult">
+    	<id column="NOTICENUM" property="noticeNum"/>
+    	<result column="NOTICETITLE" property="noticeTitle"/>
+    	<result column="WRITER" property="writer"/>
+    	<result column="NOTICECONTENTS" property="noticeContents"/>
+    	<result column="NOTICEDATE" property="noticeDate"/>
+    	<result column="NOTICEVIEWS" property="noticeViews"/>
+    	<result column="NOTICEREF" property="noticeRef"/>
+    	<result column="NOTICESTEP" property="noticeStep"/>
+    	<result column="NOTICEDEPTH" property="noticeDepth"/>
+    	<collection property="boardFiles" javaType="List" ofType="BoardFileDTO">
+    		<id property="fileNum" column="FILENUM"/>
+    		<result column="FILENAME" property="fileName"/>
+    		<result column="ORINAME" property="oriName"/>
+    	</collection>
+	</resultMap>
 </mapper>

@@ -1,6 +1,7 @@
 package com.moveone.app.board;
 
 import java.sql.Date;
+import java.util.List;
 
 public class BoardDTO {
 	private Long noticeNum;
@@ -9,7 +10,14 @@ public class BoardDTO {
 	private String noticeContents;
 	private Date noticeDate;
 	private Long noticeViews;
+	private List<BoardFileDTO> boardFiles;
 	
+	public List<BoardFileDTO> getBoardFiles() {
+		return boardFiles;
+	}
+	public void setBoardFiles(List<BoardFileDTO> boardFiles) {
+		this.boardFiles = boardFiles;
+	}
 	public Long getNoticeNum() {
 		return noticeNum;
 	}
