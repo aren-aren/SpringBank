@@ -18,11 +18,14 @@
     <select id="getList" parameterType="Pager" resultType="ProductDTO">
         SELECT PR.PRODUCTNUM, PR.PRODUCTNAME, PR.PRODUCTRATE, PR.PRODUCTJUMSU, PR.PRODUCTCOUNT
         FROM (
-            SELECT ROWNUM R, P.*
-            FROM PRODUCT P
-            <include refid="search"/>
-            ORDER BY P.PRODUCTNUM DESC
-        ) PR
+        	SELECT ROWNUM R, P.* 
+        	FROM (
+            	SELECT *
+            	FROM PRODUCT
+            	<include refid="search"/>
+            	ORDER BY PRODUCTNUM DESC
+        	) P
+        )PR
         WHERE PR.R BETWEEN #{startRow} AND #{lastRow}
     </select>
 
@@ -63,4 +66,12 @@
         INSERT INTO PRODUCTFILE
         VALUES (PRODUCT_SEQ.NEXTVAL, #{productNum}, #{fileName}, #{oriName})
     </insert>
+    
+    <select id="getFileList" parameterType="ProductDTO" resultType="ProductFileDTO">
+    	SELECT FILENAME FROM PRODUCTFILE WHERE PRODUCTNUM = #{productNum}
+    </select>
+    
+    <delete id="delete" parameterType="ProductDTO">
+    	DELETE PRODUCT WHERE PRODUCTNUM = #{productNum}
+    </delete>
 </mapper>

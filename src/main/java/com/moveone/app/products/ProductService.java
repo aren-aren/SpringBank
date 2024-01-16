@@ -56,4 +56,16 @@ public class ProductService {
 
         return detail;
     }
+
+	public int delete(ProductDTO productDTO) {
+		List<ProductFileDTO> files = productDAO.getFileList(productDTO);
+		String path = servletContext.getRealPath("/resources/upload/products");
+		for(ProductFileDTO file : files) {
+			fileManager.fileDelete(file.getFileName(), path);
+		}
+		
+		int result = productDAO.delete(productDTO);
+		
+		return result;
+	}
 }

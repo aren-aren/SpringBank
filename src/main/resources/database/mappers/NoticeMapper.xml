@@ -20,12 +20,14 @@
 
 	<select id="getList" parameterType="Pager" resultType="NoticeDTO">
 	SELECT * FROM(
-		SELECT ROWNUM R, N.* 
-		FROM NOTICE N
-		<include refid="search"></include>
-		ORDER BY NOTICENUM DESC
-	) NO
-	WHERE NO.R BETWEEN #{startRow} AND #{lastRow}
+			SELECT ROWNUM R, N.*
+			FROM (SELECT *
+				FROM NOTICE
+				<include refid="search"></include>
+				ORDER BY NOTICENUM DESC
+				) N
+			) NO
+		WHERE NO.R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">
