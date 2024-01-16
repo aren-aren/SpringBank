@@ -2,46 +2,96 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.moveone.app.board.notice.qna.QnADAO">
+	<sql id="search">
+		<where>
+			<if test="kind == 'kind1' or kind == 'kind4'">
+				NOTICETITLE LIKE '%'||#{search}||'%'
+			</if>
+			<if test="kind == 'kind2' or kind == 'kind4'">
+				OR NOTICECONTENTS LIKE '%'||#{search}||'%'
+			</if>
+			<if test="kind == 'kind3' or kind == 'kind4'">
+				OR WRITER LIKE '%'||#{search}||'%'
+			</if>
+		</where>
+	</sql>
 	<select id="getList" parameterType="Pager" resultType="QnADTO">
-	SELECT * FROM(
-		SELECT ROWNUM R, Q.* 
-		FROM QNA Q
-		ORDER BY NOTICENUM DESC
-	) QA
-	WHERE QA.R BETWEEN #{startRow} AND #{lastRow}
+		SELECT * FROM(
+			SELECT ROWNUM R, QN.*
+			FROM (SELECT Q.*
+				FROM QNA Q
+				<include refid="search"></include>
+				ORDER BY NOTICEREF DESC, NOTICESTEP ASC, NOTICENUM DESC
+				) QN
+			) QA
+		WHERE QA.R BETWEEN #{startRow} AND #{lastRow}
 	</select>
-	
-	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
+
+	<select id="getTotalCount" parameterType="Pager"
+		resultType="Long">
+		SELECT COUNT(NOTICENUM) FROM QNA <include refid="search"></include>
+	</select>
+
+	<select id="getDetail" parameterType="BoardDTO"
+		resultMap="getDetailResult">
 		SELECT *
 		FROM QNA
-			LEFT JOIN QNAFILES USING(NOTICENUM)
+		LEFT JOIN QNAFILES USING(NOTICENUM)
 		WHERE NOTICENUM = #{noticeNum}
 	</select>
-	
+
 	<resultMap type="QnADTO" id="getDetailResult">
-    	<id column="NOTICENUM" property="noticeNum"/>
-    	<result column="NOTICETITLE" property="noticeTitle"/>
-    	<result column="WRITER" property="writer"/>
-    	<result column="NOTICECONTENTS" property="noticeContents"/>
-    	<result column="NOTICEDATE" property="noticeDate"/>
-    	<result column="NOTICEVIEWS" property="noticeViews"/>
-    	<result column="NOTICEREF" property="noticeRef"/>
-    	<result column="NOTICESTEP" property="noticeStep"/>
-    	<result column="NOTICEDEPTH" property="noticeDepth"/>
-    	<collection property="boardFiles" javaType="List" ofType="BoardFileDTO">
-    		<id property="fileNum" column="FILENUM"/>
-    		<result column="FILENAME" property="fileName"/>
-    		<result column="ORINAME" property="oriName"/>
-    	</collection>
+		<id column="NOTICENUM" property="noticeNum" />
+		<result column="NOTICETITLE" property="noticeTitle" />
+		<result column="WRITER" property="writer" />
+		<result column="NOTICECONTENTS" property="noticeContents" />
+		<result column="NOTICEDATE" property="noticeDate" />
+		<result column="NOTICEVIEWS" property="noticeViews" />
+		<result column="NOTICEREF" property="noticeRef" />
+		<result column="NOTICESTEP" property="noticeStep" />
+		<result column="NOTICEDEPTH" property="noticeDepth" />
+		<collection property="boardFiles" javaType="List"
+			ofType="BoardFileDTO">
+			<id property="fileNum" column="FILENUM" />
+			<result column="FILENAME" property="fileName" />
+			<result column="ORINAME" property="oriName" />
+		</collection>
 	</resultMap>
-	
+
 	<insert id="setAdd" parameterType="QnADTO">
-		<selectKey resultType="Long" keyProperty="noticeNum" order="BEFORE">
-            SELECT QNA_SEQ.NEXTVAL FROM DUAL
-        </selectKey>
-		INSERT INTO QNA(NOTICENUM, NOTICETITLE, WRITER, NOTICECONTENTS, NOTICEREF, NOTICESTEP, NOTICEDEPTH)
-		VALUES (#{noticeNum}, #{noticeTitle}, #{writer}, #{noticeContents}, #{noticeNum}, 0, 0)		
+		<selectKey resultType="Long" keyProperty="noticeNum"
+			order="BEFORE">
+			SELECT QNA_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO QNA(NOTICENUM, NOTICETITLE, WRITER, NOTICECONTENTS,
+		NOTICEREF, NOTICESTEP, NOTICEDEPTH)
+		VALUES (#{noticeNum},
+		#{noticeTitle}, #{writer}, #{noticeContents}, #{noticeNum}, 0, 0)
+	</insert>
+
+	<insert id="setAddReply" parameterType="QnADTO">
+		<selectKey resultType="Long" keyProperty="noticeNum"
+			order="BEFORE">
+			SELECT QNA_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO QNA(NOTICENUM, NOTICETITLE, WRITER, NOTICECONTENTS,
+		NOTICEREF, NOTICESTEP, NOTICEDEPTH)
+		VALUES (#{noticeNum},
+		#{noticeTitle}, #{writer}, #{noticeContents}, #{noticeRef},
+		#{noticeStep}, #{noticeDepth})
+	</insert>
+
+	<update id="setUpdateStep" parameterType="QnADTO">
+		UPDATE QNA
+		SET NOTICESTEP = NOTICESTEP + 1
+		WHERE NOTICEREF = #{noticeRef} AND NOTICESTEP > #{noticeStep}
+	</update>
+
+	<insert id="setAddFile">
+		INSERT INTO QNAFILES
+		VALUES (QNA_SEQ.NEXTVAL,
+		#{noticeNum}, #{fileName}, #{oriName})
 	</insert>
 </mapper>

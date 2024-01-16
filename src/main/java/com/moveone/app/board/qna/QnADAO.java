@@ -41,20 +41,25 @@ public class QnADAO implements BoardDAO {
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Long getTotalCount(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace + "getTotalCount", pager);
 	}
 
 	@Override
 	public int setAddFile(BoardFileDTO fileDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(namespace + "setAddFile", fileDTO);
+	}
+
+	public int setUpdateStep(QnADTO parentDTO) {
+		return sqlSession.update(namespace + "setUpdateStep", parentDTO);
+	}
+	
+	public int setAddReply(QnADTO qnaDTO) {
+		return sqlSession.insert(namespace + "setAddReply", qnaDTO);
 	}
 
 }

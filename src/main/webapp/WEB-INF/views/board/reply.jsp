@@ -20,12 +20,12 @@
 		<div class="container px-5">
 			<div class="bg-light rounded-4 py-5 px-4 px-md-5">
 				<div class="text-center mb-5">
-					<h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">${title } 글쓰기</span></h1>
+					<h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">답글쓰기</span></h1>
 				</div>
 				
 				<div class="row gx-5 justify-content-center">
 					<div class="col-lg-8 col-xl-8">
-						<form id="contactForm" action="add" method="post" enctype="multipart/form-data">
+						<form id="contactForm" action="reply" method="post" enctype="multipart/form-data">
 							<!-- ProductName input -->
 							<div class="form-floating mb-3">
 								<input id="NoticeTitle" name="noticeTitle" class="form-control" type="text" placeholder="제목을 입력하세요" /> 
@@ -43,10 +43,12 @@
 
 							<div class="mb-3">
 								<h5 class="fw-bolder mb-1">첨부파일</h5>
-								<input type="file" class="form-control" name="attachs" accept="image/*">
-								<input type="file" class="form-control" name="attachs" accept="image/*">
-								<input type="file" class="form-control" name="attachs" accept="image/*">
+								<input type="file" class="form-control" name="files">
+								<input type="file" class="form-control" name="files">
+								<input type="file" class="form-control" name="files">
 							</div>
+							
+							<input type="hidden" name="noticeNum" value="${parentNum}">
 
 							<div class="d-grid">
 								<button class="btn btn-primary btn-lg" id="submitButton" type="submit">추가</button>
@@ -62,17 +64,6 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script type="text/javascript">
     	$("#noticeContents").summernote();
-    	document.querySelectorAll("input[name=attachs]")
-    		.forEach(file => file.addEventListener("change", event=> {
-    						let a = event.target.value.split(".");
-    						let image = /png|jpg|jpeg/;
-    						
-    						console.log(a[a.length-1]);
-    						if(!(image.test(a[a.length-1]))){
-    							event.target.value="";
-    						}
-    					})
-    				)
     </script>
 </body>
 </html>

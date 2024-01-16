@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Personal - Start Bootstrap Theme</title>
+<title>${title }</title>
 <!-- 사용전 경로 수정 -->
 <c:import url="../templates/head_css.jsp"></c:import>
 </head>
@@ -19,39 +19,65 @@
 		<div class="container px-5">
 			<div class="bg-light rounded-4 py-5 px-4 px-md-5">
 				<div class="text-center mb-5">
-					<h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">${title}</span></h1>
+					<h1 class="display-5 fw-bolder mb-0">
+						<span class="text-gradient d-inline">${title}</span>
+					</h1>
 				</div>
-				
+
 				<div class="row gx-5 justify-content-center">
 					<div class="col-lg-8 col-xl-8">
 
-						<div class="card w-50">
+						<div class="card w-100 shadow">
 							<div class="card-body">
 								<h6>${dto.noticeNum}</h6>
 								<h5 class="card-title">${dto.noticeTitle}</h5>
 								<c:if test="${not empty dto.boardFiles}">
-									<span>Files</span>
-									<c:forEach items="${dto.boardFiles}" var="img">
-										<a href="/resources/upload/products/${img.fileName}">${img.oriName}</a>
-									</c:forEach>
+									<div id="carouselExample" class="carousel slide">
+										<div class="carousel-indicators">
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+											<c:forEach begin="2"  end="${dto.boardFiles.size()}" var="i" >
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i-1}" aria-label="Slide ${i}"></button>
+											</c:forEach>
+										</div>
+										<div class="carousel-inner">
+											<c:forEach items="${dto.boardFiles}" var="img">
+												<div class="carousel-item">
+													<img src="/resources/upload/${path }/${img.fileName}" width="100%" />
+												</div>
+											</c:forEach>
+										</div>
+										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+											<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+										</button>
+										<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+											<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+										</button>
+									</div>
 								</c:if>
 								<p class="card-text">${dto.noticeContents}</p>
 							</div>
 							<ul class="list-group list-group-flush text-center">
 							</ul>
 							<div class="card-body">
-								<a href="update" class="card-link">수정하기</a>
-								<a href="delete" class="card-link">삭제하기</a>
+								<a href="update" class="card-link">수정하기</a> <a href="delete" class="card-link">삭제하기</a>
 							</div>
 						</div>
 
+						<c:if test="${bbs eq 1 }">
+							<div>
+								<a href="reply?noticeNum=${dto.noticeNum}">답글달기</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
 		</div>
 	</main>
+	<script type="text/javascript">
+		document.querySelector(".carousel-item").classList.add("active");
+	</script>
 	<c:import url="../templates/footer.jsp"></c:import>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </body>
 </html>

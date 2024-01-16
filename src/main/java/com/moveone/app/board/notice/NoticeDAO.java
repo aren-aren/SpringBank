@@ -48,7 +48,7 @@ public class NoticeDAO implements BoardDAO {
 	@Override
 	public Long getTotalCount(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace + "getTotalCount", pager);
 	}
 
 	@Override

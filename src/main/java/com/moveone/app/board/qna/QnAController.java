@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.moveone.app.board.BoardDTO;
 import com.moveone.app.board.BoardService;
@@ -20,8 +22,22 @@ import com.moveone.app.utils.Pager;
 public class QnAController {
 	
 	@Autowired
-	@Qualifier("qnAService")
-	private BoardService boardService;
+	private QnAService qnaService;
+	
+	@ModelAttribute("title")
+	public String getTitle() {
+		return "Q&A";
+	}
+	
+	@ModelAttribute("bbs")
+	public Integer getKind() {
+		return 1;
+	}
+	
+	@ModelAttribute("path")
+	public String getPath() {
+		return "qna";
+	}
 	
 	/*
 	 * 답글
@@ -46,18 +62,19 @@ public class QnAController {
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public String getList(Pager pager, Model model) throws Exception {
-		List<BoardDTO> list = boardService.getList(pager);
+		List<BoardDTO> list = qnaService.getList(pager);
 		model.addAttribute("list", list);
-		model.addAttribute("title", "Q&A");
+		
 		return "board/list";
 	}
 	
 	@GetMapping("detail")
 	public String getDetail(QnADTO qnaDTO, Model model) throws Exception {
-		QnADTO dto = (QnADTO) boardService.getDetail(qnaDTO);
+		QnADTO dto = (QnADTO) qnaService.getDetail(qnaDTO);
 		
 		model.addAttribute("dto", dto);
-		model.addAttribute("title", "Q&A");
+		
+		
 		
 		return "board/detail";
 	}
@@ -68,8 +85,22 @@ public class QnAController {
 	}
 	
 	@PostMapping("add")
-	public String add(QnADTO qnaDTO) throws Exception{
-		boardService.setAdd(qnaDTO, null);
+	public String add(QnADTO qnaDTO, MultipartFile[] files) throws Exception{
+		qnaService.setAdd(qnaDTO, files);
+		
+		return "redirect:./list";
+	}
+	
+	@GetMapping("reply")
+	public String reply(BoardDTO boardDTO, Model model) {
+		model.addAttribute("parentNum", boardDTO.getNoticeNum());
+		
+		return "board/reply";
+	}
+	
+	@PostMapping("reply")
+	public String reply(QnADTO qnaDTO, MultipartFile[] attachs) throws Exception {
+		int result = qnaService.setReply(qnaDTO, attachs);
 		
 		return "redirect:./list";
 	}

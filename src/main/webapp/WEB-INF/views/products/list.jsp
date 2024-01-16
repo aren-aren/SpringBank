@@ -25,7 +25,7 @@
     <div class="row justify-content-center">
 
 
-        <div class="w-75">
+        <div class="col-lg-11 col-xl-9 col-xxl-8">
             <form action="list" method="get">
                 <div class="row">
                     <input type="hidden" name="page" value="${pager.page}">

@@ -29,6 +29,8 @@ public class NoticeService implements BoardService {
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		pager.makeRow();
+		Long totalCount = noticeDAO.getTotalCount(pager);
+		pager.makeBlock(totalCount);
 		return noticeDAO.getList(pager);
 	}
 
@@ -42,9 +44,11 @@ public class NoticeService implements BoardService {
 		System.out.println(boardDTO.getNoticeNum());
 		int result = noticeDAO.setAdd(boardDTO);
 		System.out.println(boardDTO.getNoticeNum());
-		String path = servletContext.getRealPath("/resources/upload/noitce");
+		String path = servletContext.getRealPath("/resources/upload/notice");
 		
 		for(MultipartFile file : files) {
+			if(file.isEmpty()) continue;
+			
 			String filename = fileManager.fileSave(file, path);
 			
 			BoardFileDTO fileDTO = new BoardFileDTO();
