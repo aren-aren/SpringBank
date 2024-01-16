@@ -41,7 +41,7 @@ public class QnADAO implements BoardDAO {
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
-		return 0;
+		return sqlSession.update(namespace + "setDelete", boardDTO);
 	}
 
 	@Override
@@ -54,6 +54,16 @@ public class QnADAO implements BoardDAO {
 		return sqlSession.insert(namespace + "setAddFile", fileDTO);
 	}
 
+	@Override
+	public List<BoardFileDTO> getFileList(BoardDTO boardDTO) {
+		return sqlSession.selectList(namespace + "getFileList", boardDTO);
+	}
+	
+	@Override
+	public int setDeleteFiles(BoardDTO boardDTO) {
+		return sqlSession.delete(namespace + "setDeleteFiles", boardDTO);
+	}
+	
 	public int setUpdateStep(QnADTO parentDTO) {
 		return sqlSession.update(namespace + "setUpdateStep", parentDTO);
 	}
@@ -61,5 +71,7 @@ public class QnADAO implements BoardDAO {
 	public int setAddReply(QnADTO qnaDTO) {
 		return sqlSession.insert(namespace + "setAddReply", qnaDTO);
 	}
+
+
 
 }

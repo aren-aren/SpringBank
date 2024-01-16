@@ -104,4 +104,19 @@ public class QnAController {
 		
 		return "redirect:./list";
 	}
+	
+	@GetMapping("update")
+	public String update(QnADTO qnaDTO, Model model) throws Exception {
+		QnADTO target = (QnADTO) qnaService.getDetail(qnaDTO);
+		
+		model.addAttribute("dto", target);
+		
+		return "board/update";
+	}
+	@PostMapping("delete")
+	public String delete(QnADTO qnaDTO) throws Exception {
+		int result = qnaService.setDelete(qnaDTO);
+		
+		return "redirect:./list";
+	}
 }

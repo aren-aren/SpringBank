@@ -33,7 +33,7 @@
 							</div>
 							<!-- ProductContents input -->
 							<div class="form-floating mb-3">
-								<textarea id="ProductContents" name="productContents"></textarea>
+								<textarea id="summernoteContents" name="productContents"></textarea>
 							</div>
 							<!-- ProductRate input -->
 							<div class="form-floating mb-3">
@@ -43,11 +43,11 @@
 
 							<div class="mb-3">
 								<h5 class="fw-bolder mb-1">첨부파일</h5>
-								<input type="file" class="form-control" name="files">
-								<input type="file" class="form-control" name="files">
-								<input type="file" class="form-control" name="files">
-								<input type="file" class="form-control" name="files">
-								<input type="file" class="form-control" name="files">
+								<input type="file" class="form-control" name="attachs">
+								<input type="file" class="form-control" name="attachs">
+								<input type="file" class="form-control" name="attachs">
+								<input type="file" class="form-control" name="attachs">
+								<input type="file" class="form-control" name="attachs">
 							</div>
 
 							<div class="d-grid">
@@ -62,8 +62,6 @@
 	<c:import url="../templates/footer.jsp"></c:import>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <script type="text/javascript">
-    	$("#ProductContents").summernote();
-    </script>
+    <script src="/resources/js/scripts.js" type="text/javascript"></script>
 </body>
 </html>

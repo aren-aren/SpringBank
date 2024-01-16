@@ -33,7 +33,7 @@
 							</div>
 							<!-- ProductContents input -->
 							<div class="form-floating mb-3">
-								<textarea id="noticeContents" name="noticeContents"></textarea>
+								<textarea id="summernoteContents" name="noticeContents"></textarea>
 							</div>
 							<!-- ProductRate input -->
 							<div class="form-floating mb-3">
@@ -60,19 +60,6 @@
 	<c:import url="../templates/footer.jsp"></c:import>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <script type="text/javascript">
-    	$("#noticeContents").summernote();
-    	document.querySelectorAll("input[name=attachs]")
-    		.forEach(file => file.addEventListener("change", event=> {
-    						let a = event.target.value.split(".");
-    						let image = /png|jpg|jpeg/;
-    						
-    						console.log(a[a.length-1]);
-    						if(!(image.test(a[a.length-1]))){
-    							event.target.value="";
-    						}
-    					})
-    				)
-    </script>
+    <script src="/resources/js/scripts.js" type="text/javascript"></script>
 </body>
 </html>

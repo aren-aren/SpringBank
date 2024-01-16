@@ -33,6 +33,10 @@
 		resultType="Long">
 		SELECT COUNT(NOTICENUM) FROM QNA <include refid="search"></include>
 	</select>
+	
+	<select id="getFileList" parameterType="BoardDTO" resultType="BoardFileDTO">
+		SELECT FILENAME FROM QNAFILES WHERE NOTICENUM = #{noticeNum}
+	</select>
 
 	<select id="getDetail" parameterType="BoardDTO"
 		resultMap="getDetailResult">
@@ -72,8 +76,7 @@
 	</insert>
 
 	<insert id="setAddReply" parameterType="QnADTO">
-		<selectKey resultType="Long" keyProperty="noticeNum"
-			order="BEFORE">
+		<selectKey resultType="Long" keyProperty="noticeNum" order="BEFORE"> 
 			SELECT QNA_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO QNA(NOTICENUM, NOTICETITLE, WRITER, NOTICECONTENTS,
@@ -94,4 +97,14 @@
 		VALUES (QNA_SEQ.NEXTVAL,
 		#{noticeNum}, #{fileName}, #{oriName})
 	</insert>
+	
+	<delete id="setDeleteFiles">
+	 	DELETE QNAFILES WHERE NOTICENUM = #{noticeNum}
+	</delete>
+	
+	<update id="setDelete" parameterType="QnADTO">
+		UPDATE QNA 
+		SET FLAG=#{flag}
+		WHERE NOTICENUM = #{noticeNum}
+	</update>
 </mapper>

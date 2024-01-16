@@ -71,4 +71,21 @@ public class NoticeController {
 		
 		return "redirect:./list";
 	}
+	
+	@GetMapping("update")
+	public String update(NoticeDTO noticeDTO, Model model) throws Exception {
+		NoticeDTO target = (NoticeDTO) boardService.getDetail(noticeDTO);
+		
+		model.addAttribute("dto", target);
+		
+		return "board/update";
+	}
+	
+	@PostMapping("delete")
+	public String delete(BoardDTO boardDTO) throws Exception {
+		
+		int result = boardService.setDelete(boardDTO);
+		
+		return "redirect:./list";
+	}
 }

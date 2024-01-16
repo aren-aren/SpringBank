@@ -67,4 +67,15 @@
 		VALUES (NOTICE_SEQ.NEXTVAL, #{noticeNum}, #{fileName}, #{oriName})
 	</insert>
 	
+	<select id="getFileList" parameterType="BoardDTO" resultType="BoardFileDTO">
+		SELECT FILENAME FROM NOTICEFILES WHERE NOTICENUM = #{noticeNum}
+	</select>
+	
+	<delete id="setDeleteFiles" parameterType="BoardDTO">
+		DELETE NOTICEFILES WHERE NOTICENUM = #{noticeNum}
+	</delete>
+	
+	<delete id="setDelete" parameterType="BoardDTO">
+		DELETE NOTICE WHERE NOTICENUM=#{noticeNum}
+	</delete>
 </mapper>

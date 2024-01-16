@@ -32,7 +32,9 @@ public class QnAService implements BoardService{
 		pager.makeRow();
 		Long totalCount = boardDAO.getTotalCount(pager);
 		pager.makeBlock(totalCount);
-		return boardDAO.getList(pager);
+		List<BoardDTO> list = boardDAO.getList(pager);
+		
+		return list;
 	}
 
 	@Override
@@ -68,8 +70,25 @@ public class QnAService implements BoardService{
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		//DB에서 파일 조회
+		List<BoardFileDTO> files = boardDAO.getFileList(boardDTO);
+		
+		//파일 삭제
+		String path = servletContext.getRealPath("/resources/upload/qna");
+		for(BoardFileDTO file : files) {
+			fileManager.fileDelete(file.getFileName(), path);
+		}
+		
+		//DB에서 파일 삭제
+		int result = boardDAO.setDeleteFiles(boardDTO);
+		System.out.println("deletedFiles : " + result);
+		
+		//글 수정
+		((QnADTO)boardDTO).setFlag(1);
+		result = boardDAO.setDelete(boardDTO);
+		System.out.println("delete : " + result);
+		
+		return result;
 	}
 	
 	public int setReply(QnADTO qnaDTO, MultipartFile[] files) throws Exception {

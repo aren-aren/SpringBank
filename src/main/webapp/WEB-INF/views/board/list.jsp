@@ -31,19 +31,19 @@
 						<div class="row">
 							<input type="hidden" name="page" value="${pager.page}">
 							<div class="col-auto px-1">
-								<select class="form-select" name="kind">
+								<select class="form-select form-select-sm" name="kind">
 									<option value="kind4">전체</option>
 									<option value="kind1">제목</option>
 									<option value="kind2">내용</option>
 									<option value="kind3">글쓴이</option>
-									
+
 								</select>
 							</div>
 							<div class="col-auto px-1">
-								<input class="form-control" name="search" type="text">
+								<input class="form-control form-control-sm" name="search" type="text">
 							</div>
 							<div class="col-auto px-1">
-								<button class="btn btn-primary">Search</button>
+								<button class="btn btn-primary btn-sm">Search</button>
 							</div>
 						</div>
 					</form>
@@ -60,20 +60,35 @@
 							</thead>
 							<tbody class="table-group-divider">
 								<c:forEach items="${list}" var="dto">
-									<tr>
-										<td>${dto.noticeNum}</td>
-										<td><c:catch>
-												<c:forEach begin="1" end="${dto.noticeDepth}">
-												　
-												</c:forEach>
-												<c:if test="${dto.noticeDepth ne 0}">
-                                        		re:
-                                        	</c:if>
-											</c:catch> <a href="./detail?noticeNum=${dto.noticeNum}"> ${dto.noticeTitle} </a></td>
-										<td>${dto.writer}</td>
-										<td>${dto.noticeDate }</td>
-										<td>${dto.noticeViews }</td>
-									</tr>
+									<c:set var="f" value="0"></c:set>
+									<c:catch>
+										<c:set var="f" value="${dto.flag }"></c:set>
+									</c:catch>
+									<c:if test="${f eq 1 }">
+										<tr>
+											<td></td>
+											<td>삭제된 글 입니다</td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+									</c:if>
+									<c:if test="${f eq 0 }">
+										<tr>
+											<td>${dto.noticeNum}</td>
+											<td><c:catch>
+													<c:forEach begin="1" end="${dto.noticeDepth}">
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													</c:forEach>
+													<c:if test="${dto.noticeDepth ne 0}">
+                                        			re:
+                                        			</c:if>
+												</c:catch> <a href="./detail?noticeNum=${dto.noticeNum}"> ${dto.noticeTitle} </a></td>
+											<td>${dto.writer}</td>
+											<td>${dto.noticeDate }</td>
+											<td>${dto.noticeViews }</td>
+										</tr>
+									</c:if>
 								</c:forEach>
 							</tbody>
 						</table>
