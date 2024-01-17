@@ -7,13 +7,13 @@
 	<sql id="search">
 		<where>
 			<if test="kind == 'kind1' or kind == 'kind4'">
-				NOTICETITLE LIKE '%'||#{search}||'%'
+				NOTICETITLE LIKE '%'||#{search}||'%' AND FLAG=0
 			</if>
 			<if test="kind == 'kind2' or kind == 'kind4'">
-				OR NOTICECONTENTS LIKE '%'||#{search}||'%'
+				OR NOTICECONTENTS LIKE '%'||#{search}||'%' AND FLAG=0
 			</if>
 			<if test="kind == 'kind3' or kind == 'kind4'">
-				OR WRITER LIKE '%'||#{search}||'%'
+				OR WRITER LIKE '%'||#{search}||'%' AND FLAG=0
 			</if>
 		</where>
 	</sql>

@@ -123,9 +123,9 @@ public class Pager {
         lastNum = currentBlock * perBlock;
 
         start = (currentBlock == 1L);
-        if(currentBlock.equals(lastBlock)){
+        if(currentBlock>=lastBlock){
             last = true;
-            lastNum = totalPage;
+            lastNum = Math.max(totalPage,1L);
         }
     }
 

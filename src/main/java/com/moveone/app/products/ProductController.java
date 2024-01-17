@@ -74,6 +74,6 @@ public class ProductController {
 	public String update(ProductDTO productDTO, MultipartFile[] attachs) {
 		int result = productService.update(productDTO, attachs);
 		
-		return "redirect:./list";
+		return "redirect:./detail?productNum="+productDTO.getProductNum();
 	}
 }

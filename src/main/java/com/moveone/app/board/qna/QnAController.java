@@ -3,7 +3,6 @@ package com.moveone.app.board.qna;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.moveone.app.board.BoardDTO;
-import com.moveone.app.board.BoardService;
 import com.moveone.app.utils.Pager;
 
 @Controller
@@ -118,7 +116,7 @@ public class QnAController {
 	public String update(QnADTO qnaDTO, MultipartFile[] attachs) throws Exception {
 		int result = qnaService.setUpdate(qnaDTO, attachs);
 		
-		return "redirect:./list";
+		return "redirect:./detail?noticeNum=" + qnaDTO.getNoticeNum();
 	}
 	@PostMapping("delete")
 	public String delete(QnADTO qnaDTO) throws Exception {

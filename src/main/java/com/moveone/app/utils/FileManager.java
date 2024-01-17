@@ -3,8 +3,6 @@ package com.moveone.app.utils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.moveone.app.board.BoardFileDTO;
-
 import java.io.File;
 import java.util.UUID;
 

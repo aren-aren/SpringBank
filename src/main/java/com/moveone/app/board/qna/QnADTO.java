@@ -1,7 +1,5 @@
 package com.moveone.app.board.qna;
 
-import java.sql.Date;
-
 import com.moveone.app.board.BoardDTO;
 
 public class QnADTO extends BoardDTO {

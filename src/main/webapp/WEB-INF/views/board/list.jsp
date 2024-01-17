@@ -29,7 +29,6 @@
 				<div class="col-lg-11 col-xl-9 col-xxl-8">
 					<form action="list" method="get">
 						<div class="row">
-							<input type="hidden" name="page" value="${pager.page}">
 							<div class="col-auto px-1">
 								<select id="kindBy" class="form-select form-select-sm" name="kind">
 									<option value="kind4">전체</option>
@@ -59,6 +58,12 @@
 								</tr>
 							</thead>
 							<tbody class="table-group-divider">
+								<c:if test="${list.isEmpty()}">
+									<tr>
+										<td></td>
+										<td colspan="3">검색 결과가 없습니다.</td>
+									</tr>
+								</c:if>
 								<c:forEach items="${list}" var="dto">
 									<c:set var="f" value="0"></c:set>
 									<c:catch>

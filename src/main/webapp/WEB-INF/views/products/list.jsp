@@ -31,7 +31,6 @@
 				<div class="row">
 					<form class="col-9" action="list" method="get">
 						<div class="row">
-							<input type="hidden" name="page" value="${pager.page}">
 							<input type="hidden" name="sortBy" value="${pager.sortBy}">
 							<div class="col-auto px-1">
 								<select id="kindBy" data-kind="${pager.kind}" class="form-select form-select-sm" name="kind">
@@ -49,13 +48,7 @@
 						</div>
 					</form>
 					<div class="col-3">
-						<select 
-							id="sortBy" 
-							class="form-select form-select-sm" 
-							data-url="?page=${pager.page}&search=${pager.search}&kind=${pager.kind}"
-							aria-label="Small select example"
-							data-sort="${pager.sortBy}"
-							>
+						<select id="sortBy" class="form-select form-select-sm" data-url="?page=${pager.page}&search=${pager.search}&kind=${pager.kind}" aria-label="Small select example" data-sort="${pager.sortBy}">
 							<option value="default">기본순</option>
 							<option value="rate">이자율순</option>
 							<option value="jumsu">평점순</option>
@@ -73,6 +66,12 @@
 						</tr>
 					</thead>
 					<tbody class="table-group-divider">
+						<c:if test="${list.isEmpty()}">
+							<tr>
+								<td></td>
+								<td colspan="4">검색 결과가 없습니다.</td>
+							</tr>
+						</c:if>
 						<c:forEach items="${list}" var="dto">
 							<tr>
 								<td>${dto.productNum}</td>

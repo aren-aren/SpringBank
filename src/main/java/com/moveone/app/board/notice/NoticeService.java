@@ -1,6 +1,5 @@
 package com.moveone.app.board.notice;
 
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -13,7 +12,6 @@ import com.moveone.app.board.BoardDAO;
 import com.moveone.app.board.BoardDTO;
 import com.moveone.app.board.BoardFileDTO;
 import com.moveone.app.board.BoardService;
-import com.moveone.app.board.qna.QnADTO;
 import com.moveone.app.utils.FileManager;
 import com.moveone.app.utils.Pager;
 
