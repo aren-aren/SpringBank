@@ -4,11 +4,8 @@ import com.moveone.app.MyTest;
 import com.moveone.app.utils.Pager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import java.util.List;
 
 import static org.junit.Assert.*;

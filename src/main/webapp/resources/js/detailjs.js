@@ -1,3 +1,4 @@
+(function(){
 const update = document.getElementById("update");
 const del = document.getElementById("delete");
 const frm = document.getElementById("submitForm");
@@ -21,3 +22,4 @@ del.addEventListener("click", event => {
     frm.setAttribute("method", "post");
     frm.submit();
 })
+})();

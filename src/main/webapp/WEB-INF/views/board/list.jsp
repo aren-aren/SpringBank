@@ -31,7 +31,7 @@
 						<div class="row">
 							<input type="hidden" name="page" value="${pager.page}">
 							<div class="col-auto px-1">
-								<select class="form-select form-select-sm" name="kind">
+								<select id="kindBy" class="form-select form-select-sm" name="kind">
 									<option value="kind4">전체</option>
 									<option value="kind1">제목</option>
 									<option value="kind2">내용</option>
@@ -40,7 +40,7 @@
 								</select>
 							</div>
 							<div class="col-auto px-1">
-								<input class="form-control form-control-sm" name="search" type="text">
+								<input class="form-control form-control-sm" value="${pager.search}" name="search" type="text">
 							</div>
 							<div class="col-auto px-1">
 								<button class="btn btn-primary btn-sm">Search</button>
