@@ -120,6 +120,7 @@
 		</section>
 	</main>
 	<!-- 사용전 경로 수정 -->
+	<script src="/resources/js/list.js"></script>
 	<c:import url="../templates/footer.jsp"></c:import>
 </body>
 </html>

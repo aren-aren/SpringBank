@@ -71,6 +71,20 @@ public class NoticeController {
 		
 		return "redirect:./list";
 	}
+	/*
+	 * 요청의 종류
+	 * 동기식 요청
+	 * 비동기식 요청 (ajax)
+	 * 
+	 * 응답의 종류
+	 * Forward
+	 * 요청 -> 필요한 정보를 찾아줌
+	 *  - 처음 요청한 url이 남음
+	 * 
+	 * Redirect
+	 * 요청 -> 필요한 정보를 찾을 수 있는 곳을 알려줌
+	 *  - url이 변경
+	 */
 	
 	@GetMapping("update")
 	public String update(NoticeDTO noticeDTO, Model model) throws Exception {
@@ -84,7 +98,7 @@ public class NoticeController {
 	public String update(NoticeDTO noticeDTO, MultipartFile[] attachs) throws Exception {
 		boardService.setUpdate(noticeDTO, attachs);
 		
-		return "redirect:./list";
+		return "redirect:./detail?noticeNum=" + noticeDTO.getNoticeNum();
 	}
 	
 	@PostMapping("delete")

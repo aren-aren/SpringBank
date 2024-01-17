@@ -23,7 +23,14 @@
             	SELECT *
             	FROM PRODUCT
             	<include refid="search"/>
-            	ORDER BY PRODUCTNUM DESC
+            	ORDER BY 
+            	<if test="sortBy == 'rate'">
+            		PRODUCTRATE DESC,	
+            	</if>
+            	<if test="sortBy == 'jumsu'">
+            		PRODUCTJUMSU DESC,
+            	</if>
+            	PRODUCTNUM DESC
         	) P
         )PR
         WHERE PR.R BETWEEN #{startRow} AND #{lastRow}

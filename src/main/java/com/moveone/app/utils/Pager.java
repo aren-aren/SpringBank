@@ -15,6 +15,8 @@ public class Pager {
 
     private String search;
     private String kind;
+    
+    private String sortBy;
 
     public String getSearch() {
         return search;
@@ -114,6 +116,7 @@ public class Pager {
         Long perBlock = 5L;
 
         Long lastBlock = (long) Math.ceil((double) totalPage /perBlock);
+        lastBlock = Math.max(1L, lastBlock);
         Long currentBlock = (long) Math.floor((double) (getPage() - 1) /perBlock) + 1;
 
         startNum = 1 + (currentBlock - 1)*perBlock;
@@ -140,4 +143,12 @@ public class Pager {
                 ", last=" + last +
                 '}';
     }
+
+	public String getSortBy() {
+		return sortBy;
+	}
+
+	public void setSortBy(String sortBy) {
+		this.sortBy = sortBy;
+	}
 }

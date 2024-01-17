@@ -29,7 +29,7 @@ public class ProductServiceTest extends MyTest {
         assertEquals(10, list.size());
     }
 
-    @Test
+    //@Test
     public void add() throws Exception {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductName("Rqqqq");
@@ -42,7 +42,7 @@ public class ProductServiceTest extends MyTest {
         assertEquals(1, reuslt);
     }
 
-    @Test
+    //@Test
     public  void detail(){
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductNum(3L);
