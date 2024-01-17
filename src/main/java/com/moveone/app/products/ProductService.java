@@ -2,6 +2,8 @@ package com.moveone.app.products;
 
 import com.moveone.app.utils.FileManager;
 import com.moveone.app.utils.Pager;
+import com.moveone.app.utils.TagChanger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,9 @@ public class ProductService {
     }
 
     public int add(ProductDTO productDTO, MultipartFile[] files) throws Exception {
+    	productDTO.setProductName(TagChanger.tagChange(productDTO.getProductName()));
+    	productDTO.setProductContents(TagChanger.tagChange(productDTO.getProductContents()));
+    	
         int result = productDAO.add(productDTO);
 
         String path = servletContext.getRealPath("/resources/upload/products");

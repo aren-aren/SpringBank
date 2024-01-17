@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.moveone.app.board.BoardDTO;
 import com.moveone.app.board.BoardService;
 import com.moveone.app.utils.Pager;
+import com.moveone.app.utils.TagChanger;
 
 @Controller
 @RequestMapping(value="/notice/*")

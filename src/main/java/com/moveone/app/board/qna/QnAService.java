@@ -15,6 +15,7 @@ import com.moveone.app.board.BoardFileDTO;
 import com.moveone.app.board.BoardService;
 import com.moveone.app.utils.FileManager;
 import com.moveone.app.utils.Pager;
+import com.moveone.app.utils.TagChanger;
 
 @Service
 public class QnAService implements BoardService{
@@ -44,6 +45,8 @@ public class QnAService implements BoardService{
 
 	@Override
 	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
+		boardDTO.setNoticeTitle(TagChanger.tagChange(boardDTO.getNoticeTitle()));
+		
 		int result = boardDAO.setAdd(boardDTO);
 		
 		String path = servletContext.getRealPath("/resources/upload/qna");

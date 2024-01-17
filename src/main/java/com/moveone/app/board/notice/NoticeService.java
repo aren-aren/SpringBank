@@ -14,6 +14,7 @@ import com.moveone.app.board.BoardFileDTO;
 import com.moveone.app.board.BoardService;
 import com.moveone.app.utils.FileManager;
 import com.moveone.app.utils.Pager;
+import com.moveone.app.utils.TagChanger;
 
 @Service
 public class NoticeService implements BoardService {
@@ -25,12 +26,15 @@ public class NoticeService implements BoardService {
 	@Autowired
 	private FileManager fileManager;
 
+
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		pager.makeRow();
 		Long totalCount = noticeDAO.getTotalCount(pager);
 		pager.makeBlock(totalCount);
+		
 		return noticeDAO.getList(pager);
+		
 	}
 
 	@Override
@@ -40,9 +44,9 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
-		System.out.println(boardDTO.getNoticeNum());
+		boardDTO.setNoticeTitle(TagChanger.tagChange(boardDTO.getNoticeTitle()));
+		
 		int result = noticeDAO.setAdd(boardDTO);
-		System.out.println(boardDTO.getNoticeNum());
 		String path = servletContext.getRealPath("/resources/upload/notice");
 
 		for (MultipartFile file : files) {
