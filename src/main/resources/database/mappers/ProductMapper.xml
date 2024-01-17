@@ -74,4 +74,20 @@
     <delete id="delete" parameterType="ProductDTO">
     	DELETE PRODUCT WHERE PRODUCTNUM = #{productNum}
     </delete>
+    
+    <update id="update" parameterType="ProductDTO">
+    	UPDATE PRODUCT
+    	<set>
+    	<if test="productName!=null and productName!=''">
+    		PRODUCTNAME = #{productName},
+    	</if>
+    	<if test="productContents!=null and productContents!=''">
+    		PRODUCTCONTENTS = #{productContents},
+    	</if>
+    	<if test="productRate!=null and productRate!=''">
+    		PRODUCTRATE = #{productRate},
+    	</if>
+    	</set>
+    	WHERE PRODUCTNUM = #{productNum}
+    </update>
 </mapper>

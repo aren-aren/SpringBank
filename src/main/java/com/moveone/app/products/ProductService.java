@@ -68,4 +68,9 @@ public class ProductService {
 		
 		return result;
 	}
+
+	public int update(ProductDTO productDTO, MultipartFile[] attachs) {
+		
+		return productDAO.update(productDTO);
+	}
 }

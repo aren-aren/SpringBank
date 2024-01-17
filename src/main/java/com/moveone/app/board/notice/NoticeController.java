@@ -75,10 +75,16 @@ public class NoticeController {
 	@GetMapping("update")
 	public String update(NoticeDTO noticeDTO, Model model) throws Exception {
 		NoticeDTO target = (NoticeDTO) boardService.getDetail(noticeDTO);
-		
 		model.addAttribute("dto", target);
 		
 		return "board/update";
+	}
+	
+	@PostMapping("update")
+	public String update(NoticeDTO noticeDTO, MultipartFile[] attachs) throws Exception {
+		boardService.setUpdate(noticeDTO, attachs);
+		
+		return "redirect:./list";
 	}
 	
 	@PostMapping("delete")
@@ -88,4 +94,5 @@ public class NoticeController {
 		
 		return "redirect:./list";
 	}
+	
 }

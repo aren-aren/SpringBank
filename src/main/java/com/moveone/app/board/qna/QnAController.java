@@ -113,6 +113,13 @@ public class QnAController {
 		
 		return "board/update";
 	}
+	
+	@PostMapping("update")
+	public String update(QnADTO qnaDTO, MultipartFile[] attachs) throws Exception {
+		int result = qnaService.setUpdate(qnaDTO, attachs);
+		
+		return "redirect:./list";
+	}
 	@PostMapping("delete")
 	public String delete(QnADTO qnaDTO) throws Exception {
 		int result = qnaService.setDelete(qnaDTO);

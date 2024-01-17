@@ -6,6 +6,7 @@ import com.moveone.app.utils.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,6 +58,22 @@ public class ProductController {
 	@PostMapping("delete")
 	public String delete(ProductDTO productDTO) {
 		int result = productService.delete(productDTO);
+		return "redirect:./list";
+	}
+	
+	@GetMapping("update")
+	public String update(ProductDTO productDTO, Model model) {
+		ProductDTO dto = productService.getDetail(productDTO);
+		
+		model.addAttribute("dto", dto);
+		
+		return "products/update";
+	}
+	
+	@PostMapping("update")
+	public String update(ProductDTO productDTO, MultipartFile[] attachs) {
+		int result = productService.update(productDTO, attachs);
+		
 		return "redirect:./list";
 	}
 }

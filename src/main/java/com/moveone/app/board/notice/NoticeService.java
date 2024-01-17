@@ -65,9 +65,10 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setUpdate(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int setUpdate(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
+		//파일을 저장
+		
+		return noticeDAO.setUpdate(boardDTO);
 	}
 
 	@Override
@@ -81,12 +82,8 @@ public class NoticeService implements BoardService {
 			fileManager.fileDelete(file.getFileName(), path);
 		}
 
-		// DB에서 파일 삭제
-		int result = noticeDAO.setDeleteFiles(boardDTO);
-		System.out.println("deletedFiles : " + result);
-
 		// 글 삭제
-		result = noticeDAO.setDelete(boardDTO);
+		int result = noticeDAO.setDelete(boardDTO);
 		System.out.println("delete : " + result);
 
 		return result;

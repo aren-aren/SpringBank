@@ -107,4 +107,17 @@
 		SET FLAG=#{flag}
 		WHERE NOTICENUM = #{noticeNum}
 	</update>
+	
+	<update id="setUpdate" parameterType="QnADTO">
+		UPDATE QNA
+		<set>
+		<if test="noticeContents != null and noticeContents != ''">
+			NOTICECONTENTS = #{noticeContents},
+		</if>
+		<if test="noticeTitle != null and noticeTitle!=''">
+			NOTICETITLE = #{noticeTitle},
+		</if>
+		</set>
+		WHERE NOTICENUM = #{noticeNum}
+	</update>
 </mapper>

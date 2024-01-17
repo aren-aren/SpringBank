@@ -80,4 +80,17 @@
 	<delete id="setDelete" parameterType="BoardDTO">
 		DELETE NOTICE WHERE NOTICENUM=#{noticeNum}
 	</delete>
+	
+	<update id="setUpdate" parameterType="BoardDTO">
+		UPDATE NOTICE 
+		<set>
+		<if test="noticeTitle != null and noticeTitle!=''">
+			NOTICETITLE = #{noticeTitle},
+		</if>
+		<if test="noticeContents != null and noticeContents!=''">
+			NOTICECONTENTS = #{noticeContents},
+		</if>
+		</set>
+		WHERE NOTICENUM = #{noticeNum}
+	</update>
 </mapper>
