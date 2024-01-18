@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
 	<div class="container px-5">
 		<a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Start Bootstrap</span></a>
@@ -11,6 +12,16 @@
 				<li class="nav-item"><a class="nav-link" href="/products/list">Product</a></li>
 				<li class="nav-item"><a class="nav-link" href="/notice/list">Notice</a></li>
 				<li class="nav-item"><a class="nav-link" href="/qna/list">Q&A</a></li>
+			</ul>
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+				<c:if test="${empty member}">
+					<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
+					<li class="nav-item"><a class="nav-link" href="/member/join">회원가입</a></li>
+				</c:if>
+				<c:if test="${not empty member}">
+					<li class="nav-item"><a class="nav-link" href="/member/mypage">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
+				</c:if>
 			</ul>
 		</div>
 	</div>

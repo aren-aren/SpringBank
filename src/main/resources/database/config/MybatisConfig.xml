@@ -12,6 +12,8 @@
 		 <typeAlias type="com.moveone.app.board.qna.QnADTO" alias="QnADTO"/>
 		 <typeAlias type="com.moveone.app.products.ProductFileDTO" alias="ProductFileDTO"/>
 		 <typeAlias type="com.moveone.app.board.BoardFileDTO" alias="BoardFileDTO"/>
+		 <typeAlias type="com.moveone.app.member.MemberDTO" alias="MemberDTO"/>
+		 <typeAlias type="com.moveone.app.member.AvatarDTO" alias="AvatarDTO"/>
 		 
 		 <typeAlias type="java.lang.String" alias="String"/>
 		 <typeAlias type="java.lang.Long" alias="Long"/>

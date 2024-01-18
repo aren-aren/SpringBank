@@ -2,6 +2,9 @@ package com.moveone.app.products;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import com.moveone.app.member.MemberDTO;
 import com.moveone.app.utils.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +43,8 @@ public class ProductController {
 	
 	@RequestMapping(value="add", method=RequestMethod.POST)
 	public String add(ProductDTO productDTO, MultipartFile[] files, Model model) throws Exception {
+		System.out.println("product, add = " + productDTO);
+		
 		int result = productService.add(productDTO, files);
 
 		String msg = (result == 1) ? "등록 성공" : "동록 실패";
@@ -72,6 +77,7 @@ public class ProductController {
 	
 	@PostMapping("update")
 	public String update(ProductDTO productDTO, MultipartFile[] attachs) {
+		System.out.println("product, update = " + productDTO);
 		int result = productService.update(productDTO, attachs);
 		
 		return "redirect:./detail?productNum="+productDTO.getProductNum();

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.moveone.app.member.MemberDAO">
+	<select id="getDetail" parameterType="MemberDTO" resultMap="getDetailResult">
+		SELECT * 
+		FROM MEMBER
+			LEFT JOIN AVATAR USING(USERNAME)
+		WHERE USERNAME=#{userName}
+	</select>
+	<resultMap type="MemberDTO" id="getDetailResult">
+		<id property="userName" column="USERNAME"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="name" column="NAME"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="phone" column="PHONE"/>
+		<result property="email" column="EMAIL"/>
+		<association property="avatar" javaType="AvatarDTO">
+			<id property="fileNum" column="FILENUM"/>
+			<result property="fileName" column="FILENAME"/>
+			<result property="oriName" column="ORINAME"/>
+		</association>
+	</resultMap>
+	
+	<insert id="join" parameterType="MemberDTO">
+		INSERT INTO MEMBER(USERNAME, PASSWORD, PHONE, EMAIL, ADDRESS, NAME)
+		VALUES (#{userName}, #{password}, #{phone}, #{email}, #{address}, #{name})
+	</insert>
+	
+	<insert id="addAvatar" parameterType="AvatarDTO">
+		INSERT INTO AVATAR(FILENUM, USERNAME, FILENAME, ORINAME)
+		VALUES (AVATAR_SEQ.NEXTVAL, #{userName}, #{fileName}, #{oriName})
+	</insert>
+</mapper>

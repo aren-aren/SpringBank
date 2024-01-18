@@ -2,6 +2,8 @@ package com.moveone.app.board.qna;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.moveone.app.board.BoardDTO;
+import com.moveone.app.member.MemberDTO;
 import com.moveone.app.utils.Pager;
 
 @Controller
@@ -83,7 +86,10 @@ public class QnAController {
 	}
 	
 	@PostMapping("add")
-	public String add(QnADTO qnaDTO, MultipartFile[] files) throws Exception{
+	public String add(QnADTO qnaDTO, MultipartFile[] files, HttpSession session) throws Exception{
+		System.out.println("qna, add = " + qnaDTO);
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		qnaDTO.setWriter(memberDTO.getUserName());
 		qnaService.setAdd(qnaDTO, files);
 		
 		return "redirect:./list";
@@ -91,13 +97,16 @@ public class QnAController {
 	
 	@GetMapping("reply")
 	public String reply(BoardDTO boardDTO, Model model) {
-		model.addAttribute("parentNum", boardDTO.getNoticeNum());
+		model.addAttribute("dto", boardDTO);
 		
 		return "board/reply";
 	}
 	
 	@PostMapping("reply")
-	public String reply(QnADTO qnaDTO, MultipartFile[] attachs) throws Exception {
+	public String reply(QnADTO qnaDTO, MultipartFile[] attachs, HttpSession session) throws Exception {
+		System.out.println("qna, reply = " + qnaDTO);
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		qnaDTO.setWriter(memberDTO.getUserName());
 		int result = qnaService.setReply(qnaDTO, attachs);
 		
 		return "redirect:./list";
@@ -114,6 +123,7 @@ public class QnAController {
 	
 	@PostMapping("update")
 	public String update(QnADTO qnaDTO, MultipartFile[] attachs) throws Exception {
+		System.out.println("qna, update = " + qnaDTO);
 		int result = qnaService.setUpdate(qnaDTO, attachs);
 		
 		return "redirect:./detail?noticeNum=" + qnaDTO.getNoticeNum();

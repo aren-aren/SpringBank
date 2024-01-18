@@ -2,6 +2,8 @@ package com.moveone.app.board.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.moveone.app.board.BoardDTO;
 import com.moveone.app.board.BoardService;
+import com.moveone.app.member.MemberDTO;
 import com.moveone.app.utils.Pager;
 import com.moveone.app.utils.TagChanger;
 
@@ -65,8 +68,10 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public String add(NoticeDTO noticeDTO, MultipartFile[] attachs) throws Exception {
-		System.out.println(noticeDTO);
+	public String add(NoticeDTO noticeDTO, MultipartFile[] attachs, HttpSession session) throws Exception {
+		System.out.println("NOTICE, ADD = " + noticeDTO);
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		noticeDTO.setWriter(memberDTO.getUserName());
 		int result = boardService.setAdd(noticeDTO, attachs);
 		
 		return "redirect:./list";
@@ -96,6 +101,7 @@ public class NoticeController {
 	
 	@PostMapping("update")
 	public String update(NoticeDTO noticeDTO, MultipartFile[] attachs) throws Exception {
+		System.out.println("NOTICE, UPDATE = " + noticeDTO);
 		boardService.setUpdate(noticeDTO, attachs);
 		
 		return "redirect:./detail?noticeNum=" + noticeDTO.getNoticeNum();
