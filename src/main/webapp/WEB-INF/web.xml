@@ -46,7 +46,7 @@
 	</servlet-mapping>
 	
 
-	<filter>
+<!-- 	<filter>
 		<filter-name>Filter1</filter-name>
 		<filter-class>com.moveone.app.filters.Filter1</filter-class>
 	</filter>
@@ -64,5 +64,5 @@
 	<filter-mapping>
 		<filter-name>Filter2</filter-name>
 		<url-pattern>/qna/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 </web-app>

@@ -27,13 +27,16 @@
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/**"/>
-			<exclude-mapping path="/notice/*"/>
-			<beans:ref bean="testInterceptor"/>
+			<mapping path="/qna/*"/>
+			<exclude-mapping path="/qna/list"/>
+			<beans:ref bean="authenticationInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/qna/*"/>
-			<beans:ref bean="authenticationInterceptor"/>
+			<mapping path="/qna/update"/>
+			<mapping path="/qna/delete"/>
+			<mapping path="/notice/update"/>
+			<mapping path="/notice/delete"/>
+			<beans:ref bean="writerCheckInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

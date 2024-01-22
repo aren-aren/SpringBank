@@ -62,11 +62,13 @@
 							<c:if test="${bbs eq 1 }">
 								<a class="btn btn-primary" href="reply?noticeNum=${dto.noticeNum}">답글달기</a>
 							</c:if>
+							<c:if test="${dto.writer eq member.userName}">
 								<a id="delete" class="btn btn-outline-danger float-end">삭제하기</a> 
 								<a id="update" class="btn btn-outline-success float-end">수정하기</a>
 								<form id="submitForm" action="./update" method="get">
 									<input type='hidden' name="noticeNum" value="${dto.noticeNum }">
 								</form>
+							</c:if>
 							</div>
 						</div>
 
