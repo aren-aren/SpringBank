@@ -102,9 +102,11 @@
 					</ul>
 				</nav>
 
+				<c:if test="${not empty member}">
 				<div>
 					<a class="btn btn-primary" href="add">상품등록</a>
 				</div>
+				</c:if>
 			</div>
 		</div>
 

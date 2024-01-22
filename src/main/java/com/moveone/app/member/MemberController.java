@@ -67,23 +67,31 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	// map to member/mypage.jsp
 	@GetMapping("mypage")
-	public void getDetail() throws Exception { }
+	public String getDetail(HttpSession httpSession, Model model) throws Exception { 
+		MemberDTO loginDTO = (MemberDTO) httpSession.getAttribute("member");
+		MemberDTO memberDTO = memberService.getDetail(loginDTO);
+		
+		model.addAttribute("member", memberDTO);
+		
+		return "member/mypage";
+	}
 	
-	// map to member/update.jsp
 	@GetMapping("update")
-	public void setUpdate() throws Exception { }
+	public String setUpdate(HttpSession httpSession, Model model) throws Exception { 
+		MemberDTO loginDTO = (MemberDTO) httpSession.getAttribute("member");
+		MemberDTO memberDTO = memberService.getDetail(loginDTO);
+		
+		model.addAttribute("member", memberDTO);
+		
+		return "member/update";
+	}
 	
 	@PostMapping("update")
 	public String setUpdate(MemberDTO memberDTO, HttpSession httpSession) throws Exception {
 		MemberDTO loginDTO = (MemberDTO) httpSession.getAttribute("member");
 		memberDTO.setUserName(loginDTO.getUserName());
-		memberDTO = memberService.setUpdate(memberDTO);
-		
-		if(memberDTO != null) {
-			httpSession.setAttribute("member", memberDTO);
-		}
+		int result = memberService.setUpdate(memberDTO);
 		
 		return "redirect:./mypage";
 	}

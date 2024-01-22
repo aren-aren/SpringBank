@@ -36,25 +36,20 @@ public class MemberService {
 	public MemberDTO getLogin(MemberDTO loginDTO) {
 		MemberDTO memberDTO = memberDAO.getDetail(loginDTO);
 		
-		if(memberDTO != null) {
-			if(memberDTO.getPassword().equals(loginDTO.getPassword())) {
-				return memberDTO;
-			}
-			
-			return null;
+		if( memberDTO!=null && memberDTO.getPassword().equals(loginDTO.getPassword()) ) {
+			loginDTO.setAvatar(memberDTO.getAvatar());
+			return loginDTO;
 		}
-		
-		return memberDTO;
+			
+		return null;
 	}
 
-	public MemberDTO setUpdate(MemberDTO memberDTO) {
-		int result = memberDAO.setUpdate(memberDTO);
-		
-		if(result > 0) {
-			return memberDAO.getDetail(memberDTO);
-		}
-		
-		return null;
+	public int setUpdate(MemberDTO memberDTO) {
+		return memberDAO.setUpdate(memberDTO);
+	}
+	
+	public MemberDTO getDetail(MemberDTO memberDTO) {
+		return memberDAO.getDetail(memberDTO);
 	}
 
 }

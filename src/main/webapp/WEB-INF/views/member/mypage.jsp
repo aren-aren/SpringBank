@@ -57,7 +57,11 @@
 									<p class="mb-1">${member.email}</p> 
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-primary" href="update">정보 수정</a>
+									<div class="btn-group" role="group" aria-label="Basic example">
+										<a class="btn btn-outline-primary" href="update">정보 수정</a>
+										<a class="btn btn-outline-primary" href="updatePassword">비밀번호 변경</a>
+										<a class="btn btn-outline-danger" href="delete">회원 탈퇴</a>
+									</div>
 								</li>
 							</ul>
 						</div>
