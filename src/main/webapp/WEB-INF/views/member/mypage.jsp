@@ -75,12 +75,9 @@
 	<c:import url="../templates/footer.jsp"></c:import>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5d3142b32fe85131261af1fb1aaf26c&libraries=services"></script>
 	<script type="text/javascript">
-		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		(()=>{
+		let container = document.getElementById('map');
 		let geocoder = new kakao.maps.services.Geocoder();
-		/* let map; */
-		
-	
-		 //지도 생성 및 객체 리턴
 		
 		let callback = function(result, status) {
 		    if (status === kakao.maps.services.Status.OK) {
@@ -88,22 +85,18 @@
 		        console.log(result[0].x);
 		        console.log(result[0].y);
 		        
-		        var options = { //지도를 생성할 때 필요한 기본 옵션
-		    			/* center: new kakao.maps.LatLng(126.887662, 37.468416), //지도의 중심좌표. */
-   						center: new kakao.maps.LatLng(result[0].y, result[0].x), //지도의 중심좌표.
-
-		    			level: 3 //지도의 레벨(확대, 축소 정도)
+		        let options = { 
+   						center: new kakao.maps.LatLng(result[0].y, result[0].x), 
+		    			level: 3
 		    		};
 		        
-		        var map = new kakao.maps.Map(container, options);
+		        let map = new kakao.maps.Map(container, options);
 		        console.log(map)
 		    }
 		};
 
-		
 		geocoder.addressSearch('${member.address}', callback);
-		
-		
+	})();
 	</script>
 </body>
 </html>

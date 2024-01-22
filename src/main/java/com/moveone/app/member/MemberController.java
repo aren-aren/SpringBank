@@ -39,6 +39,11 @@ public class MemberController {
 		return "commons/result";
 	}
 	
+	@GetMapping("agreement")
+	public void setAgreement() throws Exception {
+		
+	}
+	
 	@GetMapping("login")
 	public String login() {
 		return "member/login";
