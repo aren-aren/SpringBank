@@ -10,7 +10,6 @@
 <title>Personal - Start Bootstrap Theme</title>
 <!-- 사용전 경로 수정 -->
 <c:import url="../templates/head_css.jsp"></c:import>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100">
 	<main class="flex-shrink-0">
@@ -60,8 +59,7 @@
 		</div>
 	</main>
 	<c:import url="../templates/footer.jsp"></c:import>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<c:import url="../templates/summernote.jsp"></c:import>
     <script src="/resources/js/scripts.js" type="text/javascript"></script>
 </body>
 </html>

@@ -31,7 +31,7 @@
                                         <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="/member/join">회원가입</a>
                                     </c:if>
                                     <c:if test="${not empty member}">
-                                        <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="#">Resume</a>
+                                        <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="/member/mypage">마이페이지</a>
                                         <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="/member/logout">로그아웃</a>
                                     </c:if>
                                 </div>
