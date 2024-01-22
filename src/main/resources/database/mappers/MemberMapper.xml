@@ -33,4 +33,23 @@
 		INSERT INTO AVATAR(FILENUM, USERNAME, FILENAME, ORINAME)
 		VALUES (AVATAR_SEQ.NEXTVAL, #{userName}, #{fileName}, #{oriName})
 	</insert>
+	
+	<update id="setUpdate" parameterType="MemberDTO">
+		UPDATE MEMBER
+		<set>
+			<if test="name != null and name != ''">
+				NAME = #{name},
+			</if>
+			<if test="phone != null and phone != ''">
+				PHONE = #{phone},
+			</if>
+			<if test="email != null and email != ''">
+				EMAIL = #{email},
+			</if>
+			<if test="address != null and address != ''">
+				ADDRESS = #{address},
+			</if>
+		</set>
+		WHERE USERNAME = #{userName}
+	</update>
 </mapper>

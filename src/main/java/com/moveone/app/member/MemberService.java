@@ -47,4 +47,14 @@ public class MemberService {
 		return memberDTO;
 	}
 
+	public MemberDTO setUpdate(MemberDTO memberDTO) {
+		int result = memberDAO.setUpdate(memberDTO);
+		
+		if(result > 0) {
+			return memberDAO.getDetail(memberDTO);
+		}
+		
+		return null;
+	}
+
 }

@@ -19,7 +19,7 @@
 		<div class="container px-5">
 			<div class="bg-light rounded-4 py-5 px-4 px-md-5">
 				<div class="text-center mb-5">
-					<h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">${title } 회원가입</span></h1>
+					<h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">${title } 정보수정</span></h1>
 				</div>
 
 				<div class="row gx-5 justify-content-center">
@@ -32,7 +32,10 @@
 									name="userName" 
 									class="form-control" 
 									type="text" 
-									placeholder="아이디를 입력하세요"/> 
+									placeholder="아이디를 입력하세요"
+									value="${member.userName}"
+									disabled
+									/> 
 								<label for="userName">아이디</label>
 							</div>
 							<div class="form-floating mb-3">
@@ -41,7 +44,10 @@
 									name="password" 
 									class="form-control" 
 									type="password" 
-									placeholder="비밀번호를 입력하세요"/> 
+									placeholder="비밀번호를 입력하세요"
+									value="${member.password}"
+									readonly
+									/> 
 								<label for="memberPassword">비밀번호</label>
 							</div>
 							<div class="form-floating mb-3">
@@ -50,7 +56,9 @@
 									name="phone" 
 									class="form-control" 
 									type="text" 
-									placeholder="전화번호를 입력하세요"/> 
+									placeholder="전화번호를 입력하세요"
+									value="${member.phone}"
+									/> 
 								<label for="memberPhone">전화번호</label>
 							</div>
 							<div class="form-floating mb-3">
@@ -59,7 +67,9 @@
 									name="email" 
 									class="form-control" 
 									type="email" 
-									placeholder="이메일을 입력하세요"/> 
+									placeholder="이메일을 입력하세요"
+									value="${member.email}"
+									/> 
 								<label for="memberEmail">이메일</label>
 							</div>
 							<div class="input-group mb-3">
@@ -69,7 +79,9 @@
 										name="address" 
 										class="form-control" 
 										type="text" 
-										placeholder="주소를 입력하세요"/> 
+										placeholder="주소를 입력하세요"
+										value="${member.address}"
+										/> 
 									<label for="memberAddress">주소</label>
 								</div>
 								<input
@@ -85,17 +97,19 @@
 									name="name" 
 									class="form-control" 
 									type="text" 
-									placeholder="이름을 입력하세요"/> 
+									placeholder="이름을 입력하세요"
+									value="${member.name}"
+									/> 
 								<label for="memberName">이름</label>
 							</div>
 
- 							<div class="mb-3">
+ 							<!-- <div class="mb-3">
 								<h5 class="fw-bolder mb-1">Avatar 사진</h5>
 								<input type="file" class="form-control" name="file" accept="image/*">
-							</div>
+							</div> -->
 
 							<div class="d-grid">
-								<button class="btn btn-primary btn-lg" id="submitButton" type="submit">가입하기</button>
+								<button class="btn btn-primary btn-lg" id="submitButton" type="submit">Update</button>
 							</div>
 						</form>
 					</div>

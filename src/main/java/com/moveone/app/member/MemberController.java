@@ -1,6 +1,5 @@
 package com.moveone.app.member;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,9 +67,24 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// map to member/mypage.jsp
 	@GetMapping("mypage")
-	public String getDetail(HttpSession session) throws Exception {
-		return "member/mypage";
-	}
+	public void getDetail() throws Exception { }
 	
+	// map to member/update.jsp
+	@GetMapping("update")
+	public void setUpdate() throws Exception { }
+	
+	@PostMapping("update")
+	public String setUpdate(MemberDTO memberDTO, HttpSession httpSession) throws Exception {
+		MemberDTO loginDTO = (MemberDTO) httpSession.getAttribute("member");
+		memberDTO.setUserName(loginDTO.getUserName());
+		memberDTO = memberService.setUpdate(memberDTO);
+		
+		if(memberDTO != null) {
+			httpSession.setAttribute("member", memberDTO);
+		}
+		
+		return "redirect:./mypage";
+	}
 }

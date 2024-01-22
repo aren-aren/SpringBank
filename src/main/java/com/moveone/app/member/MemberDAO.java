@@ -22,4 +22,8 @@ public class MemberDAO {
 		return sqlSession.selectOne(NAMESPACE + "getDetail", memberDTO);
 	}
 
+	public int setUpdate(MemberDTO memberDTO) {
+		return sqlSession.update(NAMESPACE + "setUpdate", memberDTO);
+	}
+
 }

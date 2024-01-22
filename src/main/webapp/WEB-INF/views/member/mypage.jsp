@@ -56,6 +56,9 @@
 									</div>
 									<p class="mb-1">${member.email}</p> 
 								</li>
+								<li class="list-group-item">
+									<a class="btn btn-primary" href="update">정보 수정</a>
+								</li>
 							</ul>
 						</div>
 
