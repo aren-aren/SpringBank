@@ -26,7 +26,7 @@
 					<div class="col-lg-8 col-xl-8">
 
 						<div class="card w-50">
-							<div class="card-body">
+							<%-- <div class="card-body">
 								<h6>${dto.productNum}</h6>
 								<h5 class="card-title">${dto.productName}</h5>
 								<c:if test="${not empty dto.productFiles}">
@@ -41,16 +41,13 @@
 								<li class="list-group-item">이자율 : ${dto.productRate}</li>
 								<li class="list-group-item">평점 : ${dto.productJumsu}</li>
 								<li class="list-group-item">판매횟수 : ${dto.productCount}</li>
-							</ul>
+							</ul> --%>
 							<div class="card-body">
-								<c:if test="${not empty member}">
-								<a href="/account/add?productNum=${dto.productNum}" class="btn btn-primary float-start btn-sm">가입하기</a> 
-								</c:if>
-								
-								<a id="delete" class="btn btn-outline-danger float-end btn-sm">삭제하기</a> 
-								<a id="update" class="btn btn-outline-success float-end btn-sm">수정하기</a>
-								<form id="submitForm" action="./update" method="get">
-									<input type='hidden' name="productNum" value="${dto.productNum }">
+								<p>비밀번호 4자리를 입력해주세요</p>
+								<form action="add" method="post">
+									<input type="hidden" name="productNum" value="${product.productNum}">
+									<input type="password" name="accountPw" class="form-control">
+									<button class="btn btn-primary">가입하기</button>
 								</form>
 							</div>
 						</div>
