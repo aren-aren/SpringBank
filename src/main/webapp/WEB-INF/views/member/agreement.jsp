@@ -33,19 +33,19 @@
                             </label>
                           </div>
                           <div class="form-check">
-                            <input class="form-check-input checks" type="checkbox" value="" id="a1">
+                            <input class="form-check-input checks essential" type="checkbox" value="" id="a1">
                             <label class="form-check-label" for="a1">
                               필수 동의 1
                             </label>
                           </div>
                           <div class="form-check">
-                            <input class="form-check-input checks" type="checkbox" value="" id="a2">
+                            <input class="form-check-input checks essential" type="checkbox" value="" id="a2">
                             <label class="form-check-label" for="a2">
                               필수 동의 2
                             </label>
                           </div>
                           <div class="form-check">
-                            <input class="form-check-input checks" type="checkbox" value="" id="a3">
+                            <input class="form-check-input checks essential" type="checkbox" value="" id="a3">
                             <label class="form-check-label" for="a3">
                               필수 동의 3
                             </label>
@@ -62,12 +62,15 @@
                               선택 동의 2
                             </label>
                           </div>
+                          <div>
+                          	<a id="joinBtn" class="btn btn-primary" href="join">회원 가입</a>
+                          </div>
                     </div>
                 </div>
             </section>
         </main>
         <!-- 사용전 경로 수정 -->
 		<c:import url="../templates/footer.jsp"></c:import>
-        <script src="/resources/js/agreement.js"></script>
+        <script src="/resources/js/member/agreement.js"></script>
     </body>
 </html>
