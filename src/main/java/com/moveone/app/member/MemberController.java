@@ -100,4 +100,14 @@ public class MemberController {
 		
 		return "redirect:./mypage";
 	}
+	
+	@GetMapping("idCheck")
+	public String getIdCheck(MemberDTO memberDTO, Model model) throws Exception {
+		MemberDTO member = memberService.getDetail(memberDTO);
+		
+		int result = (member == null)? 1 : 0;
+		
+		model.addAttribute("result", result);
+		return "commons/ajaxResult";
+	}
 }

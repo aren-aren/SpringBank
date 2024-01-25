@@ -27,7 +27,8 @@
 		</div>
 	</main>
 	<c:import url="../templates/footer.jsp"></c:import>
-	<c:import url="../templates/summernote.jsp"></c:import>
     <script src="/resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/commons/fileManager.js" type="text/javascript"></script>
+	<c:import url="../templates/summernote.jsp"></c:import>
 </body>
 </html>

@@ -49,6 +49,10 @@ public class NoticeService implements BoardService {
 		int result = noticeDAO.setAdd(boardDTO);
 		String path = servletContext.getRealPath("/resources/upload/notice");
 
+		if(files == null) {
+			return result;
+		}
+		
 		for (MultipartFile file : files) {
 			if (file.isEmpty())
 				continue;

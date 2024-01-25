@@ -33,6 +33,29 @@
     const userNameResult = document.getElementById("userNameResult");
     const contactForm = document.getElementById("contactForm");
 
+    userName.addEventListener('blur',()=>{
+        if(userName.value === ''){
+            return;
+        }
+
+        fetch(`idCheck?userName=${userName.value}`, { 
+            method : "GET"
+        })
+        .then(response => response.text())
+        .then(response => {
+            if(response.trim() === '0'){
+                userNameResult.innerHTML = "중복된 아이디 입니다.";
+                idCheck = false;
+                return;
+            }
+
+            userNameResult.innerHTML = "사용 가능합니다.";
+            idCheck = true;
+        })
+    });
+
+    let idCheck = false;
+
     const userNameValid = () => {
         if (userName.value.length <= 0) {
             userNameResult.innerHTML = "아이디는 필수입력 사항입니다.";
@@ -74,7 +97,7 @@
     passwordCheck.addEventListener("blur", passwordCheckValid)
 
     contactForm.addEventListener("submit", event => {
-        if (userNameValid() && passwordValid() && passwordCheckValid()) {
+        if (userNameValid() && passwordValid() && passwordCheckValid() && idCheck) {
             alert("회원 가입")
             return;
         }

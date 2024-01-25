@@ -32,7 +32,9 @@
 									name="userName" 
 									class="form-control" 
 									type="text" 
-									placeholder="아이디를 입력하세요"/> 
+									placeholder="아이디를 입력하세요"
+									value="moveone"
+									/> 
 								<label for="userName">아이디</label>
 							</div>
 							<div class="form-floating mb-3">
@@ -41,7 +43,9 @@
 									name="password" 
 									class="form-control" 
 									type="password" 
-									placeholder="비밀번호를 입력하세요"/> 
+									placeholder="비밀번호를 입력하세요"
+									value="qwer"
+									/> 
 								<label for="memberPassword">비밀번호</label>
 							</div>
 							<div>${msg}</div>

@@ -2,28 +2,41 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.moveone.app.account.AccountDAO">
 	<insert id="addAccount">
 		INSERT INTO ACCOUNT(ACCOUNTNUM, USERNAME, PRODUCTNUM, ACCOUNTPW)
 		VALUES (#{accountNum}, #{userName}, #{productNum}, #{accountPw})
 	</insert>
 	
-	<select id="accountList" parameterType="MemberDTO" resultMap="getAccountProduct">
-		SELECT PRODUCTNAME, ACCOUNTNUM, ACCOUNTBALANCE, PRODUCTRATE, ACCOUNTDATE
-		FROM ACCOUNT RIGHT JOIN PRODUCT USING(PRODUCTNUM)
+	<select id="getTotalCount" parameterType="MemberDTO" resultType="Long">
+		SELECT COUNT(*)
+		FROM ACCOUNT
 		WHERE USERNAME = #{userName}
-		ORDER BY ACCOUNTBALANCE
 	</select>
-	
+
+	<select id="accountList" parameterType="MemberDTO" resultMap="getAccountProduct">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM R, PA.* 
+			FROM (
+				SELECT PRODUCTNAME, ACCOUNTNUM, ACCOUNTBALANCE, PRODUCTRATE, ACCOUNTDATE
+				FROM ACCOUNT LEFT JOIN PRODUCT USING(PRODUCTNUM)
+				WHERE USERNAME = #{dto.userName}
+				ORDER BY ACCOUNTBALANCE
+			) PA
+		)
+		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
+	</select>
+
 	<resultMap type="AccountDTO" id="getAccountProduct">
-		<id property="accountNum" column="ACCOUNTNUM"/>
-		<result property="accountBalance" column="ACCOUNTBALANCE"/>
-		<result property="accountDate" column="ACCOUNTDATE"/>
+		<id property="accountNum" column="ACCOUNTNUM" />
+		<result property="accountBalance" column="ACCOUNTBALANCE" />
+		<result property="accountDate" column="ACCOUNTDATE" />
 		<association property="productDTO" javaType="ProductDTO">
-			<id property="productNum" column="PRODUCTNUM"/>
-			<result property="productName" column="PRODUCTNAME"/>
-			<result property="productRate" column="PRODUCTRATE"/>
+			<id property="productNum" column="PRODUCTNUM" />
+			<result property="productName" column="PRODUCTNAME" />
+			<result property="productRate" column="PRODUCTRATE" />
 		</association>
 	</resultMap>
 </mapper>

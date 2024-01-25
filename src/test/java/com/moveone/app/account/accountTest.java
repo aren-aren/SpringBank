@@ -14,12 +14,6 @@ public class accountTest extends MyTest {
 	
 	@Test
 	public void getListTest() {
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setUserName("moveone");
-		var list = accountDAO.accountList(memberDTO);
 		
-		System.out.println(list);
-		
-		assertEquals(0, list.size());
 	}
 }

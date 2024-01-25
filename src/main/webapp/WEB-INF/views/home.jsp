@@ -190,5 +190,6 @@
             </section>
         </main>
 		<c:import url="templates/footer.jsp"></c:import>
+        <script src="/resources/js/basic.js"></script>
     </body>
 </html>

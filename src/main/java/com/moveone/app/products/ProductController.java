@@ -42,10 +42,11 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="add", method=RequestMethod.POST)
-	public String add(ProductDTO productDTO, MultipartFile[] files, Model model) throws Exception {
+	public String add(ProductDTO productDTO, MultipartFile[] attachs, Model model) throws Exception {
 		System.out.println("product, add = " + productDTO);
+		System.out.println(attachs.length);
 		
-		int result = productService.add(productDTO, files);
+		int result = productService.add(productDTO, attachs);
 
 		String msg = (result == 1) ? "등록 성공" : "동록 실패";
 

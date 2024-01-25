@@ -27,7 +27,7 @@
 				ORDER BY NOTICENUM DESC
 				) N
 			) NO
-		WHERE NO.R BETWEEN #{startRow} AND #{lastRow}
+		WHERE NO.R &gt;= #{startRow} AND NO.R &lt;= #{lastRow}
 	</select>
 	
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">

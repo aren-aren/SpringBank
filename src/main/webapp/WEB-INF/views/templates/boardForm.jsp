@@ -22,25 +22,10 @@
 							<div class="form-floating mb-3">
 								<textarea id="summernoteContents" name="noticeContents">${dto.noticeContents}</textarea>
 							</div>
-							<!-- ProductRate input -->
-							<!-- <div class="form-floating mb-3">
-								<input 
-									class="form-control" 
-									name="writer" 
-									id="writer" 
-									type="text" 
-									placeholder="작성자를 입력하세요" 
-									value="${member.userName}"
-									readOnly
-									/> 
-								<label for="writer">Writer</label>
-							</div> -->
 
- 							<div class="mb-3">
-								<h5 class="fw-bolder mb-1">첨부파일</h5>
-								<input type="file" class="form-control" name="attachs" accept="image/*">
-								<input type="file" class="form-control" name="attachs" accept="image/*">
-								<input type="file" class="form-control" name="attachs" accept="image/*">
+ 							<div class="mb-3" id="fileList">
+								<button id="addBtn" class="btn btn-outline-dark mb-3">+</button>
+								<span id="addNotice" class="d-none ms-2">파일은 5개 까지만 등록가능합니다.</span>
 							</div>
 
 							<div class="d-grid">

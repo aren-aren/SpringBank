@@ -27,7 +27,7 @@
 
 						<div class="card w-50">
 							<div class="card-body">
-								<h6>${dto.productNum}</h6>
+								<div><h6 id="productNum" class="d-inline">${dto.productNum}</h6><button id="addWishBtn" type="button" class="btn btn-outline-primary float-end btn-sm">관심상품 등록</button></div>
 								<h5 class="card-title">${dto.productName}</h5>
 								<c:if test="${not empty dto.productFiles}">
 									<span>Files</span>
@@ -44,7 +44,7 @@
 							</ul>
 							<div class="card-body">
 								<c:if test="${not empty member}">
-								<a href="/account/add?productNum=${dto.productNum}" class="btn btn-primary float-start btn-sm">가입하기</a> 
+									<a href="/account/add?productNum=${dto.productNum}" class="btn btn-primary float-start btn-sm">가입하기</a> 
 								</c:if>
 								
 								<a id="delete" class="btn btn-outline-danger float-end btn-sm">삭제하기</a> 
