@@ -13,6 +13,9 @@ public class AccountDTO {
 	private Long accountBalance;
 	private ProductDTO productDTO;
 	
+	public AccountDTO() {
+	}
+	
 	public Long getAccountNum() {
 		return accountNum;
 	}

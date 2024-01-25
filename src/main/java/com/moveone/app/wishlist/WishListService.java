@@ -33,4 +33,13 @@ public class WishListService {
 		return wishListDAO.getList(map);
 	}
 
+	public int deleteWish(MemberDTO memberDTO, Long[] productNum) {
+		Map<String ,Object> map = new HashMap<>();
+		
+		map.put("dto", memberDTO);
+		map.put("list", productNum);
+		
+		return wishListDAO.deleteWish(map);
+	}
+
 }

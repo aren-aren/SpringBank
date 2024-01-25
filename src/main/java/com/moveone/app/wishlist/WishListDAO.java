@@ -30,4 +30,8 @@ public class WishListDAO {
 		return sqlSession.selectOne(NAMESPACE + "getTotalCount", memberDTO);
 	}
 
+	public int deleteWish(Map<String, Object> map) {
+		return sqlSession.delete(NAMESPACE + "deleteWish", map);
+	}
+
 }

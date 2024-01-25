@@ -29,4 +29,14 @@
 		FROM WISHLIST 
 		WHERE USERNAME=#{userName}
 	</select>
+	
+	<delete id="deleteWish" parameterType="Map">
+		DELETE WISHLIST
+		<where>
+			USERNAME = #{dto.userName} AND
+    		<foreach item="item" collection="list" open="PRODUCTNUM in (" separator="," close=")">
+          	#{item}
+    		</foreach>
+  		</where>
+	</delete>
 </mapper>

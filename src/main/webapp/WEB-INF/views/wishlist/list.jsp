@@ -32,7 +32,8 @@
 							<thead>
 								<tr>
 									<th style="width: 13%">
-										<input id="checkAll" class="form-check-input" type="checkbox">
+										<input id="checkAll" class="my-2 form-check-input" type="checkbox">
+										<button id="delAllBtn" type="button" class="d-none btn btn-outline-danger border-0 btn-sm">선택 삭제</button>
 									</th>
 									<th style="width: 32%">상품이름</th>
 									<th style="width: 21%">이자율</th>
@@ -44,16 +45,16 @@
 								<c:if test="${list.isEmpty()}">
 									<tr>
 										<td></td>
-										<td colspan="3">검색 결과가 없습니다.</td>
+										<td colspan="4">검색 결과가 없습니다.</td>
 									</tr>
 								</c:if>
 								<c:forEach items="${list}" var="dto">
 										<tr>
-											<td><input class="form-check-input checks" type="checkbox" name=""></td>
+											<td><input class="form-check-input checks" type="checkbox" value="${dto.productNum}"></td>
 											<td><a href="/products/detail?productNum=${dto.productNum}">${dto.productName }</a></td>
 											<td>${dto.productRate }</td>
 											<td>${dto.productJumsu }</td>
-											<td><button type="button" class="btn border-0 btn-outline-danger btn-sm">X</button></td>
+											<td><button type="button" data-pNum="${dto.productNum}" class="delBtn btn border-0 btn-outline-danger btn-sm">X</button></td>
 										</tr>
 								</c:forEach>
 							</tbody>
