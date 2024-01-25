@@ -15,7 +15,7 @@
 		WHERE USERNAME = #{userName}
 	</select>
 
-	<select id="accountList" parameterType="MemberDTO" resultMap="getAccountProduct">
+	<select id="accountList" parameterType="Map" resultMap="getAccountProduct">
 		SELECT * 
 		FROM (
 			SELECT ROWNUM R, PA.* 

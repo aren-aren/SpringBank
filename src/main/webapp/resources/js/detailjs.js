@@ -35,10 +35,28 @@
         .then(response => {
             console.log(response);
             if(response.trim()==='1'){
-                alert("등록 성공");
+                if(confirm("위시리스트 페이지로 이동하시겠습니까?"))
+                    location.href="/wishlist/list";
             } else {
                 alert("실?패")
             }
         })
-    })
+
+
+    //     $.ajax({
+    //         url : "/wishlist/add",
+    //         method : "GET",
+    //         data : {
+    //             productNum : $("h6#productNum").text()
+    //         },
+    //         success : function(response){
+    //             console.log("success");
+    //             console.log(response);
+    //         },
+    //         error : function(response){
+    //             console.log("error");
+    //             console.log(response);
+    //         }
+    //     })
+     })
 })();

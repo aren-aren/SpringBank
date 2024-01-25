@@ -38,19 +38,37 @@
             return;
         }
 
-        fetch(`idCheck?userName=${userName.value}`, { 
-            method : "GET"
-        })
-        .then(response => response.text())
-        .then(response => {
-            if(response.trim() === '0'){
-                userNameResult.innerHTML = "중복된 아이디 입니다.";
-                idCheck = false;
-                return;
-            }
+        /* JS */
+        // fetch(`idCheck?userName=${userName.value}`, { 
+        //     method : "GET"
+        // })
+        // .then(response => response.text())
+        // .then(response => {
+        //     if(response.trim() === '0'){
+        //         userNameResult.innerHTML = "중복된 아이디 입니다.";
+        //         idCheck = false;
+        //         return;
+        //     }
 
-            userNameResult.innerHTML = "사용 가능합니다.";
-            idCheck = true;
+        //     userNameResult.innerHTML = "사용 가능합니다.";
+        //     idCheck = true;
+        // })
+
+        /* JQuery */
+        $.ajax({
+            url : "./idCheck",
+            method : "GET",
+            data : {
+                userName : $("#userName").val()
+            },
+            success : function(result){
+                console.log("success");
+                console.log(result);
+            },
+            error : function(result){
+                console.log("error");
+                console.log(result);
+            }
         })
     });
 
