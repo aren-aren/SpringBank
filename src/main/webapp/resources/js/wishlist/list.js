@@ -1,8 +1,11 @@
-(() => {
+const initPage = () => {
     const checkAll = document.getElementById("checkAll");
     const checks = document.querySelectorAll(".checks");
     const delAllBtn = document.getElementById("delAllBtn");
     const delBtns = document.querySelectorAll(".delBtn");
+    const tableAndPager = document.getElementById("tableAndPager");
+    const nowPageNum = document.getElementById("nowPageNum");
+    const addBtn = document.getElementById("addBtn");
     let count = 0;
 
     checkAll.addEventListener("click", () => {
@@ -30,60 +33,66 @@
         })
     })
 
-    delAllBtn.addEventListener("click", ()=>{
-        const checkeds = document.querySelectorAll(".checks:checked");
-        const checkedValues = [...checkeds].map(e=>e.value);
-        console.log(checkedValues);
+    addBtn.addEventListener("click", ()=>{
+        const deleteForm = document.getElementById("deleteForm");
+        let formData = new FormData(deleteForm);
+        
+    })
 
+    delAllBtn.addEventListener("click", ()=>{
+        const checkeds = [...document.querySelectorAll(".checks:checked")];
+        deleteWithJquery(checkeds, checkeds.map(e=>e.value));
+        //deleteWithFetch(checkeds, checkeds.map(e=>e.value));
+    })
+
+    delBtns.forEach(delBtn => {
+        delBtn.addEventListener("click", event=>{
+            deleteWithJquery([event.target], event.target.getAttribute("data-pNum"));
+            //deleteWithFetch([event.target], event.target.getAttribute("data-pNum"));
+        })
+    })
+
+    function deleteWithFetch(targets, values){
+        console.log("delete Fetch Start");
+        let param = "productNum=" + values.join(",");
+        fetch('delete',{
+            method : "POST",
+            body : `page=${nowPageNum.value}&${param}`
+        }).then(response => response.text())
+        .then(result => {
+            targets.forEach(target => {
+                target.parentElement.parentElement.remove();
+            })
+
+            tableAndPager.innerHTML = result;
+            initPage();
+        })
+    }
+
+    function deleteWithJquery(targets, values){
+        console.log("delete Jquery Start");
         $.ajax({
             url : "delete",
             method : "POST",
             traditional : true,
             data : {
-                productNum : checkedValues
+                page : nowPageNum.value,
+                productNum : values
             },
             success : result => {
-                console.log("success");
-                console.log(result);
+                targets.forEach(target => {
+                    target.parentElement.parentElement.remove();
+                })
 
-                if(Number(result.trim()) > 0){
-                    checkeds.forEach(checked => {
-                        checked.parentElement.parentElement.remove();
-                        count = 0;
-                        delAllBtn.classList.add("d-none");
-                    })
-                }
+                tableAndPager.innerHTML = result;
+                initPage();
             },
             error : response => {
                 console.log("error");
                 console.log(response);
             }
         })
-    })
+    }
+}
 
-    delBtns.forEach(delBtn => {
-        delBtn.addEventListener("click", event=>{
-            const pNum = event.target.getAttribute("data-pNum");
-            $.ajax({
-                url : "delete",
-                method : "POST",
-                traditional : true,
-                data : {
-                    productNum : pNum
-                },
-                success : result => {
-                    console.log("success");
-                    console.log(result);
-    
-                    if(Number(result.trim()) > 0){
-                        event.target.parentElement.parentElement.remove();
-                    }
-                },
-                error : response => {
-                    console.log("error");
-                    console.log(response);
-                }
-            })
-        })
-    })
-})();
+initPage();

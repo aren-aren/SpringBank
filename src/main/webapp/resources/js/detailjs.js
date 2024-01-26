@@ -1,3 +1,20 @@
+const getCardList = () =>{
+    const pNum = document.getElementById("productNum").innerText;
+    const replyList = document.getElementById("replyList");
+
+    console.log(pNum);
+
+    fetch(`/reply/list?productNum=${pNum}&page=${replyList.getAttribute("data-page")}`)
+    .then(response=>response.text())
+    .then(result => {
+        if(result.trim() == ''){
+            document.getElementById("moreReplyBtn").classList.add("d-none");
+        }
+
+        replyList.innerHTML += result;
+    })
+}
+
 (function () {
     const update = document.getElementById("update");
     const del = document.getElementById("delete");
@@ -41,22 +58,41 @@
                 alert("실?패")
             }
         })
-
-
-    //     $.ajax({
-    //         url : "/wishlist/add",
-    //         method : "GET",
-    //         data : {
-    //             productNum : $("h6#productNum").text()
-    //         },
-    //         success : function(response){
-    //             console.log("success");
-    //             console.log(response);
-    //         },
-    //         error : function(response){
-    //             console.log("error");
-    //             console.log(response);
-    //         }
-    //     })
      })
+     
+     console.log("fmfkmfkmreg");
+
+    const replyAdd = document.getElementById("replyAdd");
+
+    if(replyAdd != null){
+        replyAdd.addEventListener("click",()=>{
+            console.log("replyAdd start")
+            const replyForm = document.getElementById("replyForm");
+            const data = new FormData(replyForm);
+            fetch('/reply/add',{
+                method : "POST",
+                body : data
+            }).then(response => response.text())
+            .then(result => {
+                if(result.trim() > 0){
+                    document.getElementById("replyList").innerHTML = "";
+                    replyList.setAttribute("data-page", 1);
+                    getCardList();
+                    // document.getElementById("replyContents").value = "";
+                    // document.querySelector("input[type=radio]:checked").checked = false;
+                    replyForm.reset();
+                }
+            });
+        })
+    }
+
+    const moreReplyBtn = document.getElementById("moreReplyBtn");
+    moreReplyBtn.addEventListener("click", ()=>{
+        const replyList = document.getElementById("replyList");
+        replyList.setAttribute("data-page", Number(replyList.getAttribute("data-page")) + 1);
+        getCardList();
+    })
+
+    getCardList();
 })();
+

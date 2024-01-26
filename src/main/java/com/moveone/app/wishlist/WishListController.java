@@ -50,12 +50,22 @@ public class WishListController {
 
 	// http://localhost/wishlist/list
 	@PostMapping("delete")
-	public String deleteWish(Long[] productNum, HttpSession session, Model model) {
+	public String deleteWish(Pager pager, Long[] productNum, HttpSession session, Model model) {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		
+		System.out.println(Arrays.toString(productNum));
+		
 		int result = wishListService.deleteWish(memberDTO, productNum);
+		
+		if(result > 0) {
+			System.out.println("삭제됨 : " + result);
+			List<ProductDTO> list = wishListService.getList(memberDTO, pager);
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pager", pager);
+			return "wishlist/ajaxWishlist";
+		}
 
-		System.out.println("삭제됨 : " + result);
 		model.addAttribute("result", result);
 
 		return "commons/ajaxResult";

@@ -19,15 +19,20 @@
 		<div class="container px-5">
 			<div class="bg-light rounded-4 py-5 px-4 px-md-5">
 				<div class="text-center mb-5">
-					<h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Product Detail</span></h1>
+					<h1 class="display-5 fw-bolder mb-0">
+						<span class="text-gradient d-inline">Product Detail</span>
+					</h1>
 				</div>
-				
+
 				<div class="row gx-5 justify-content-center">
 					<div class="col-lg-8 col-xl-8">
 
-						<div class="card w-50">
+						<div class="card">
 							<div class="card-body">
-								<div><h6 id="productNum" class="d-inline">${dto.productNum}</h6><button id="addWishBtn" type="button" class="btn btn-outline-primary float-end btn-sm">관심상품 등록</button></div>
+								<div>
+									<h6 id="productNum" class="d-inline">${dto.productNum}</h6>
+									<button id="addWishBtn" type="button" class="btn btn-outline-primary float-end btn-sm">관심상품 등록</button>
+								</div>
 								<h5 class="card-title">${dto.productName}</h5>
 								<c:if test="${not empty dto.productFiles}">
 									<span>Files</span>
@@ -44,16 +49,51 @@
 							</ul>
 							<div class="card-body">
 								<c:if test="${not empty member}">
-									<a href="/account/add?productNum=${dto.productNum}" class="btn btn-primary float-start btn-sm">가입하기</a> 
+									<a href="/account/add?productNum=${dto.productNum}" class="btn btn-primary float-start btn-sm">가입하기</a>
 								</c:if>
-								
-								<a id="delete" class="btn btn-outline-danger float-end btn-sm">삭제하기</a> 
-								<a id="update" class="btn btn-outline-success float-end btn-sm">수정하기</a>
+
+								<a id="delete" class="btn btn-outline-danger float-end btn-sm">삭제하기</a> <a id="update" class="btn btn-outline-success float-end btn-sm">수정하기</a>
 								<form id="submitForm" action="./update" method="get">
 									<input type='hidden' name="productNum" value="${dto.productNum }">
 								</form>
 							</div>
 						</div>
+						
+					
+						<div class="mt-5 mb-3" >
+							<div id="replyList" class="mb-1" data-page="${pager == null? 1 : pager.page}">
+							</div>
+							<button type="button" id="moreReplyBtn" class="btn btn-outline-primary w-100">더보기</button>
+						</div>
+
+						<c:if test="${not empty member}">
+						<div>
+							<form id="replyForm">
+								<input type="hidden" name="productNum" value="${dto.productNum}">
+								<div class="mb-3">
+									<label for="replyContents" class="form-label">후기 작성</label>
+									<textarea class="form-control" name="replyContents" id="replyContents" rows="3"></textarea>
+								</div>
+								<div>
+									<input class="form-check-input ms-1" type="radio" name="replyJumsu" value="5" id="replyJumsu5"> 
+									<label class="form-check-label me-1" for="replyJumsu5"> 5 </label>
+									|
+									<input class="form-check-input ms-1" type="radio" name="replyJumsu" value="4" id="replyJumsu4"> 
+									<label class="form-check-label me-1" for="replyJumsu4"> 4 </label>
+									|
+									<input class="form-check-input ms-1" type="radio" name="replyJumsu" value="3" id="replyJumsu3"> 
+									<label class="form-check-label me-1" for="replyJumsu3"> 3 </label>
+									|
+									<input class="form-check-input ms-1" type="radio" name="replyJumsu" value="2" id="replyJumsu2"> 
+									<label class="form-check-label me-1" for="replyJumsu2"> 2 </label>
+									|
+									<input class="form-check-input ms-1" type="radio" name="replyJumsu" value="1" id="replyJumsu1"> 
+									<label class="form-check-label me-3" for="replyJumsu1"> 1 </label>
+									<button type="button" class="btn btn-primary btn-sm" id="replyAdd">후기 입력</button>
+								</div>
+							</form>
+						</div>
+					</c:if>
 
 					</div>
 				</div>
@@ -61,6 +101,6 @@
 		</div>
 	</main>
 	<c:import url="../templates/footer.jsp"></c:import>
-    <script src="/resources/js/detailjs.js" type="text/javascript"></script>
+	<script src="/resources/js/detailjs.js" type="text/javascript"></script>
 </body>
 </html>
