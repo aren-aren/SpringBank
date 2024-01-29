@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.moveone.app.member.MemberDTO;
 import com.moveone.app.utils.Pager;
@@ -37,10 +38,11 @@ public class ReplyController {
 	}
 	
 	@GetMapping("list")
-	public String getList(ProductDTO productDTO, Model model, Pager pager) {
+	@ResponseBody
+	public List<ReplyDTO> getList(ProductDTO productDTO, Pager pager) {
 		List<ReplyDTO> list = replyService.getList(productDTO, pager);
 		
-		model.addAttribute("list", list);
-		return "products/replyCard";
+		//model.addAttribute("list", list);
+		return list;
 	}
 }

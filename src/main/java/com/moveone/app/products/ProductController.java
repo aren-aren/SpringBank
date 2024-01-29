@@ -2,9 +2,6 @@ package com.moveone.app.products;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
-import com.moveone.app.member.MemberDTO;
 import com.moveone.app.utils.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +18,6 @@ public class ProductController {
 
 	@Autowired
 	ProductService productService;
-	@Autowired
-	ReplyService replyService;
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public String getList(Pager pager, Model model) throws Exception {
@@ -39,12 +34,6 @@ public class ProductController {
 		productDTO = productService.getDetail(productDTO);
 
 		model.addAttribute("dto",productDTO);
-		
-		Pager pager = new Pager();
-		pager.setPage(1L);
-		List<ReplyDTO> list = replyService.getList(productDTO, pager);
-		
-		model.addAttribute("list", list);
 
 		return "products/detail";
 	}

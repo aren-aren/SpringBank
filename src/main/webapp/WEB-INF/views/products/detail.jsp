@@ -61,8 +61,7 @@
 						
 					
 						<div class="mt-5 mb-3" >
-							<div id="replyList" class="mb-1" data-page="1">
-								<c:import url="replyCard.jsp"></c:import>
+							<div id="replyList" class="mb-1" data-user-name="${member.userName}" data-page="1">
 							</div>
 							<button type="button" id="moreReplyBtn" class="btn btn-outline-primary w-100">더보기</button>
 						</div>
