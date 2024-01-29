@@ -11,7 +11,7 @@ const getCardList = () =>{
             document.getElementById("moreReplyBtn").classList.add("d-none");
         }
 
-        replyList.innerHTML += result;
+        $(replyList).append(result);
     })
 }
 
@@ -80,6 +80,7 @@ const getCardList = () =>{
                     getCardList();
                     // document.getElementById("replyContents").value = "";
                     // document.querySelector("input[type=radio]:checked").checked = false;
+                    document.getElementById("moreReplyBtn").classList.remove("d-none");
                     replyForm.reset();
                 }
             });
@@ -92,7 +93,5 @@ const getCardList = () =>{
         replyList.setAttribute("data-page", Number(replyList.getAttribute("data-page")) + 1);
         getCardList();
     })
-
-    getCardList();
 })();
 

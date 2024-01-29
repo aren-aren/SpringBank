@@ -11,6 +11,7 @@ public class ProductDTO {
     private Long productCount;
     private Long productSale;
     private List<ProductFileDTO> productFiles;
+    private List<ReplyDTO> replies;
 
     public List<ProductFileDTO> getProductFiles() {
         return productFiles;
@@ -88,5 +89,13 @@ public class ProductDTO {
                 ", productSale=" + productSale +
                 '}';
     }
+
+	public List<ReplyDTO> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<ReplyDTO> replies) {
+		this.replies = replies;
+	}
 
 }

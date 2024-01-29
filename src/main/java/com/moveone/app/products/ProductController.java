@@ -21,6 +21,8 @@ public class ProductController {
 
 	@Autowired
 	ProductService productService;
+	@Autowired
+	ReplyService replyService;
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public String getList(Pager pager, Model model) throws Exception {
@@ -37,6 +39,12 @@ public class ProductController {
 		productDTO = productService.getDetail(productDTO);
 
 		model.addAttribute("dto",productDTO);
+		
+		Pager pager = new Pager();
+		pager.setPage(1L);
+		List<ReplyDTO> list = replyService.getList(productDTO, pager);
+		
+		model.addAttribute("list", list);
 
 		return "products/detail";
 	}
