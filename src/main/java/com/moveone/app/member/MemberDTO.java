@@ -1,5 +1,9 @@
 package com.moveone.app.member;
 
+import java.util.List;
+
+import com.moveone.app.member.role.RoleDTO;
+
 public class MemberDTO {
 	private String userName;
 	private String password;
@@ -8,6 +12,7 @@ public class MemberDTO {
 	private String phone;
 	private String address;
 	private AvatarDTO avatar;
+	private List<RoleDTO> roles;
 	
 	public AvatarDTO getAvatar() {
 		return avatar;
@@ -51,9 +56,16 @@ public class MemberDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	public List<RoleDTO> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<RoleDTO> roles) {
+		this.roles = roles;
+	}
 	@Override
 	public String toString() {
-		return "MemberDTO [userName=" + userName + ", password=" + password + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address + ", avatar=" + avatar + "]";
+		return "MemberDTO [userName=" + userName + ", password=" + password + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address=" + address + ", avatar=" + avatar + ", roles=" + roles + "]";
 	}
 	
 	

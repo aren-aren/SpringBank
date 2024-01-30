@@ -21,4 +21,10 @@
 	)
 	WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
 	</select>
+	
+	<update id="setUpdate" parameterType="ReplyDTO">
+		UPDATE REPLY
+		SET REPLYCONTENTS=#{replyContents} , REPLYJUMSU=#{replyJumsu}
+		WHERE REPLYNUM=#{replyNum} AND USERNAME=#{userName}
+	</update>
 </mapper>

@@ -26,4 +26,8 @@ public class MemberDAO {
 		return sqlSession.update(NAMESPACE + "setUpdate", memberDTO);
 	}
 
+	public int setMemberRole(MemberDTO memberDTO) {
+		return sqlSession.insert(NAMESPACE + "setMemberRole", memberDTO);
+	}
+
 }

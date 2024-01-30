@@ -28,6 +28,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/qna/*"/>
+			<mapping path="/member/mypage"/>
 			<exclude-mapping path="/qna/list"/>
 			<beans:ref bean="authenticationInterceptor"/>
 		</interceptor>
@@ -37,6 +38,12 @@
 			<mapping path="/notice/update"/>
 			<mapping path="/notice/delete"/>
 			<beans:ref bean="writerCheckInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/notice/add"/>
+			<mapping path="/notice/update"/>
+			<mapping path="/notice/delete"/>
+			<beans:ref bean="adminCheckInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

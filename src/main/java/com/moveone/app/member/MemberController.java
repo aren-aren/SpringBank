@@ -5,11 +5,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.moveone.app.errors.MemberLoginException;
 
 @Controller
 @RequestMapping("/member/*")
@@ -20,6 +23,14 @@ public class MemberController {
 	@ModelAttribute("title")
 	public String getTitle() {
 		return "Member";
+	}
+	
+
+	@ExceptionHandler(MemberLoginException.class)
+	public String loginExceptionHandler(Exception e, Model model) {
+		String m = e.getMessage();
+		model.addAttribute("msg", m);
+		return "member/login";
 	}
 	
 	@GetMapping("join")
@@ -50,15 +61,11 @@ public class MemberController {
 	}
 	
 	@PostMapping("login")
-	public String login(MemberDTO memberDTO, HttpSession session, Model model) {
+	public String login(MemberDTO memberDTO, HttpSession session, Model model) throws MemberLoginException {
 		memberDTO = memberService.getLogin(memberDTO);
 		session.setAttribute("member", memberDTO);
 		
-		if(memberDTO == null) {
-			model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
-			return "member/login";
-		}
-		
+		System.out.println(memberDTO);
 		return "redirect:/";
 	}
 	

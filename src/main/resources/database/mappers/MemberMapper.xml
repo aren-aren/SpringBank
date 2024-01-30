@@ -5,9 +5,11 @@
   
 <mapper namespace="com.moveone.app.member.MemberDAO">
 	<select id="getDetail" parameterType="MemberDTO" resultMap="getDetailResult">
-		SELECT * 
+		SELECT USERNAME, PASSWORD, NAME, ADDRESS, PHONE, EMAIL, FILENUM, FILENAME, ORINAME, ROLENAME
 		FROM MEMBER
 			LEFT JOIN AVATAR USING(USERNAME)
+			INNER JOIN MEMBERROLE USING(USERNAME)
+			INNER JOIN ROLE USING(ROLENUM)
 		WHERE USERNAME=#{userName}
 	</select>
 	<resultMap type="MemberDTO" id="getDetailResult">
@@ -22,6 +24,10 @@
 			<result property="fileName" column="FILENAME"/>
 			<result property="oriName" column="ORINAME"/>
 		</association>
+		<collection property="roles" javaType="List" ofType="RoleDTO">
+			<id property="roleNum" column="ROLENUM"/>
+			<result property="roleName" column="ROLENAME"/>
+		</collection>
 	</resultMap>
 	
 	<insert id="join" parameterType="MemberDTO">

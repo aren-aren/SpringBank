@@ -37,7 +37,13 @@ const getReplyList = (productNum, page) => {
 const getCard = (reply, islogined) => {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.setAttribute("id", "replyCard" + reply.replyNum);
 
+    card.append(getCardBody(reply, islogined));
+    return card;
+}
+
+const getCardBody = (reply, islogined)=>{
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
 
@@ -60,9 +66,26 @@ const getCard = (reply, islogined) => {
     if(islogined){
         const btn = document.createElement("button");
         btn.classList.add("btn","btn-outline-danger","border-0","btn-sm");
-        btn.innerText = "X";
+        btn.innerText = "삭제";
         btn.addEventListener("click", ()=>console.log("delClicked!!"));
         cardTitle.append(btn);
+
+        const modifyBtn = document.createElement("button");
+        modifyBtn.classList.add("btn","btn-outline-success","border-0","btn-sm");
+        modifyBtn.innerText = "수정";
+        modifyBtn.setAttribute("data-bs-toggle", "modal");
+        modifyBtn.setAttribute("data-bs-target", "#replyUpdateModal");
+        modifyBtn.addEventListener("click", ()=>{
+            const replyUpdateNum = document.getElementById("replyUpdateNum");
+            replyUpdateNum.value = reply.replyNum;
+            const replyContents = document.getElementById("replyUpdateContent");
+            replyContents.value = reply.replyContents;
+            const replyJumsu = document.querySelectorAll("input[type=radio][name=replyUpdate]");
+            replyJumsu.forEach(radio=>{
+                if(radio.value == reply.replyJumsu) radio.checked = true;
+            })
+        })
+        cardTitle.append(modifyBtn);
     }
 
     const replyDate = document.createElement("span");
@@ -73,8 +96,8 @@ const getCard = (reply, islogined) => {
     cardBody.append(content);
     cardBody.append(replyDate);
 
-    card.append(cardBody);
-    return card;
+    
+    return cardBody;
 }
 
 const dateFormatting = ms => {
@@ -159,6 +182,36 @@ const dateFormatting = ms => {
         const replyList = document.getElementById("replyList");
         replyList.setAttribute("data-page", Number(replyList.getAttribute("data-page")) + 1);
         getCardList();
+    })
+
+    const replyUpdateBtn = document.getElementById("replyUpdateBtn");
+    replyUpdateBtn.addEventListener("click", ()=>{
+        const replyId = document.getElementById("replyUpdateNum").value;
+        const replyContents = document.getElementById("replyUpdateContent").value;
+        const replyJumsu = document.querySelector("input[type=radio]:checked").value;
+
+        
+
+        fetch("/reply/update", {
+            method : "post",
+            headers:{
+                "Content-type":"application/x-www-form-urlencoded"
+            },
+            body : `replyNum=${replyId}&replyContents=${replyContents}&replyJumsu=${replyJumsu}`
+        }).then(r => r.json())
+        .then(r=> {
+            if(r != null){
+                const replyCard = document.getElementById("replyCard" + replyNum);
+                replyCard.querySelector("p.card-text").innerText = replyContents;
+                replyCard.querySelectorAll("input[type=radio]").forEach(radio=>{
+                    if(radio.value == replyJumsu){
+                        radio.click();
+                    }
+                })
+            } else {
+                alert("수정 실패");
+            }
+        })
     })
 
     getCardList();

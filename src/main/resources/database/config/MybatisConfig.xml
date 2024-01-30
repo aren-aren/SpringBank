@@ -6,16 +6,22 @@
 <configuration>
 	 <typeAliases>
 		 <typeAlias type="com.moveone.app.utils.Pager" alias="Pager"/>
+		 
 		 <typeAlias type="com.moveone.app.products.ProductDTO" alias="ProductDTO"/>
-		 <typeAlias type="com.moveone.app.board.BoardDTO" alias="BoardDTO"/>
-		 <typeAlias type="com.moveone.app.board.notice.NoticeDTO" alias="NoticeDTO"/>
-		 <typeAlias type="com.moveone.app.board.qna.QnADTO" alias="QnADTO"/>
 		 <typeAlias type="com.moveone.app.products.ProductFileDTO" alias="ProductFileDTO"/>
-		 <typeAlias type="com.moveone.app.board.BoardFileDTO" alias="BoardFileDTO"/>
+		 <typeAlias type="com.moveone.app.products.ReplyDTO" alias="ReplyDTO"/>
+		 
 		 <typeAlias type="com.moveone.app.member.MemberDTO" alias="MemberDTO"/>
 		 <typeAlias type="com.moveone.app.member.AvatarDTO" alias="AvatarDTO"/>
+		 <typeAlias type="com.moveone.app.member.role.RoleDTO" alias="RoleDTO"/>
+		 
+		 <typeAlias type="com.moveone.app.board.BoardDTO" alias="BoardDTO"/>
+		 <typeAlias type="com.moveone.app.board.BoardFileDTO" alias="BoardFileDTO"/>
+		 <typeAlias type="com.moveone.app.board.notice.NoticeDTO" alias="NoticeDTO"/>
+		 <typeAlias type="com.moveone.app.board.qna.QnADTO" alias="QnADTO"/>
+		 
 		 <typeAlias type="com.moveone.app.account.AccountDTO" alias="AccountDTO"/>
-		 <typeAlias type="com.moveone.app.products.ReplyDTO" alias="ReplyDTO"/>
+		 
 		 
 		 <typeAlias type="java.lang.String" alias="String"/>
 		 <typeAlias type="java.lang.Long" alias="Long"/>

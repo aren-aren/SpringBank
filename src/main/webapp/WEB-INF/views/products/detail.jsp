@@ -100,6 +100,44 @@
 			</div>
 		</div>
 	</main>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="replyUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h1 class="modal-title fs-5" id="exampleModalLabel">후기 수정</h1>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<div class="mb-3">
+				<input type="hidden" id="replyUpdateNum" value="">
+				<textarea class="form-control" name="replyUpdateContents" id="replyUpdateContent" rows="3"></textarea>
+			</div>
+			<div>
+				<input class="form-check-input ms-1" type="radio" name="replyUpdate" value="5" id="replyUpdate5"> 
+				<label class="form-check-label me-1" for="replyUpdate5"> 5 </label>
+				|
+				<input class="form-check-input ms-1" type="radio" name="replyUpdate" value="4" id="replyUpdate4"> 
+				<label class="form-check-label me-1" for="replyUpdate4"> 4 </label>
+				|
+				<input class="form-check-input ms-1" type="radio" name="replyUpdate" value="3" id="replyUpdate3"> 
+				<label class="form-check-label me-1" for="replyUpdate3"> 3 </label>
+				|
+				<input class="form-check-input ms-1" type="radio" name="replyUpdate" value="2" id="replyUpdate2"> 
+				<label class="form-check-label me-1" for="replyUpdate2"> 2 </label>
+				|
+				<input class="form-check-input ms-1" type="radio" name="replyUpdate" value="1" id="replyUpdate1"> 
+				<label class="form-check-label me-3" for="replyUpdate1"> 1 </label>
+			</div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+		  <button id="replyUpdateBtn" type="button" class="btn btn-primary">수정하기</button>
+		</div>
+	  </div>
+	</div>
+  </div>
 	<c:import url="../templates/footer.jsp"></c:import>
 	<script src="/resources/js/detailjs.js" type="text/javascript"></script>
 </body>
